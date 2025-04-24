@@ -183,7 +183,9 @@
 
                 <div class="home-article-content markdown-body">
                     
-                        查看平均每行数据字节数123456789SELECT   table_name,  table_rows,  data_length,  index_length,  ROUND(data_length / table_rows) AS avg_ro...
+                        查看平均每行数据字节数1234SELECT *FROM information_schema.tablesWHERE table_schema = &#x27;数据库名&#x27;  AND table_name = &#x27;表名&#x27;;
+
+
                     
                 </div>
 
