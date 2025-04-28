@@ -9,7 +9,7 @@
     
     <title>
         
-            MySQL 运维手册 |
+            Java 运维手册 |
         
         Bean You
     </title>
@@ -150,7 +150,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">MySQL 运维手册</span>
+            <span class="title-hover-animation">Java 运维手册</span>
         </div>
 
         
@@ -168,7 +168,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2025-04-24 15:56:00
+        <i class="fas fa-edit"></i>&nbsp;2025-04-28 11:50:00
     </span>
     
         <span class="article-categories article-meta-item">
@@ -176,7 +176,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/MySQL/">MySQL</a>&nbsp;
+                        <a href="/categories/Java/">Java</a>&nbsp;
                     </li>
                 
             </ul>
@@ -200,7 +200,7 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="查看平均每行数据字节数"><a href="#查看平均每行数据字节数" class="headerlink" title="查看平均每行数据字节数"></a>查看平均每行数据字节数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> information_schema.tables</span><br><span class="line"><span class="keyword">WHERE</span> table_schema <span class="operator">=</span> <span class="string">&#x27;数据库名&#x27;</span></span><br><span class="line">  <span class="keyword">AND</span> table_name <span class="operator">=</span> <span class="string">&#x27;表名&#x27;</span>;</span><br></pre></td></tr></table></figure>
+            <h2 id="查看对内存情况"><a href="#查看对内存情况" class="headerlink" title="查看对内存情况"></a>查看对内存情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">jhsdb jmap --heap --pid 1</span><br><span class="line"></span><br><span class="line">Attaching to process ID 1, please <span class="built_in">wait</span>...</span><br><span class="line">Debugger attached successfully.</span><br><span class="line">Server compiler detected.</span><br><span class="line">JVM version is 11.0.21+9-LTS</span><br><span class="line"></span><br><span class="line">using thread-local object allocation.</span><br><span class="line">Concurrent Mark-Sweep GC</span><br><span class="line"></span><br><span class="line">Heap Configuration:</span><br><span class="line">   MinHeapFreeRatio         = 40</span><br><span class="line">   MaxHeapFreeRatio         = 70</span><br><span class="line">   MaxHeapSize              = 1287651328 (1228.0MB)</span><br><span class="line">   NewSize                  = 643825664 (614.0MB)</span><br><span class="line">   MaxNewSize               = 643825664 (614.0MB)</span><br><span class="line">   OldSize                  = 643825664 (614.0MB)</span><br><span class="line">   NewRatio                 = 2</span><br><span class="line">   SurvivorRatio            = 8</span><br><span class="line">   MetaspaceSize            = 21807104 (20.796875MB)</span><br><span class="line">   CompressedClassSpaceSize = 1073741824 (1024.0MB)</span><br><span class="line">   MaxMetaspaceSize         = 17592186044415 MB</span><br><span class="line">   G1HeapRegionSize         = 0 (0.0MB)</span><br><span class="line"></span><br><span class="line">Heap Usage:</span><br><span class="line">New Generation (Eden + 1 Survivor Space):</span><br><span class="line">   capacity = 579469312 (552.625MB)</span><br><span class="line">   used     = 483064120 (460.6858444213867MB)</span><br><span class="line">   free     = 96405192 (91.93915557861328MB)</span><br><span class="line">   83.36319283807043% used</span><br><span class="line">Eden Space:</span><br><span class="line">   capacity = 515112960 (491.25MB)</span><br><span class="line">   used     = 476350560 (454.2832946777344MB)</span><br><span class="line">   free     = 38762400 (36.966705322265625MB)</span><br><span class="line">   92.47497092676527% used</span><br><span class="line">From Space:</span><br><span class="line">   capacity = 64356352 (61.375MB)</span><br><span class="line">   used     = 6713560 (6.402549743652344MB)</span><br><span class="line">   free     = 57642792 (54.972450256347656MB)</span><br><span class="line">   10.431852942814409% used</span><br><span class="line">To Space:</span><br><span class="line">   capacity = 64356352 (61.375MB)</span><br><span class="line">   used     = 0 (0.0MB)</span><br><span class="line">   free     = 64356352 (61.375MB)</span><br><span class="line">   0.0% used</span><br><span class="line">concurrent mark-sweep generation:</span><br><span class="line">   capacity = 643825664 (614.0MB)</span><br><span class="line">   used     = 462162416 (440.75242614746094MB)</span><br><span class="line">   free     = 181663248 (173.24757385253906MB)</span><br><span class="line">   71.7837827601728% used</span><br></pre></td></tr></table></figure>
 
 
         </div>
@@ -210,29 +210,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/posts/38103/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Java 运维手册</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/posts/43698/"
+                           href="/posts/21099/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">ADB PostgreSQL 运维手册</span>
+                                <span class="post-nav-title-item">MySQL 运维手册</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -358,7 +343,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B9%B3%E5%9D%87%E6%AF%8F%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%AD%97%E8%8A%82%E6%95%B0"><span class="nav-text">查看平均每行数据字节数</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AF%B9%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5"><span class="nav-text">查看对内存情况</span></a></li></ol>
     </div>
 </div>
         </aside>
