@@ -211,6 +211,12 @@
 <li>-1：最新消息的 offset（<strong>最新生产位置</strong>）</li>
 <li>-2：最早消息的 offset（<strong>最早还留存的消息位置</strong>）</li>
 </ul>
+<h2 id="消费最新产生的一条消息（不是老消息的最后一条）"><a href="#消费最新产生的一条消息（不是老消息的最后一条）" class="headerlink" title="消费最新产生的一条消息（不是老消息的最后一条）"></a>消费最新产生的一条消息（不是老消息的最后一条）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-consumer.sh --bootstrap-server &lt;broker地址&gt; --topic &lt;topic名&gt; --partition &lt;分区号&gt; --offset latest --max-messages 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="消费最早的一条消息"><a href="#消费最早的一条消息" class="headerlink" title="消费最早的一条消息"></a>消费最早的一条消息</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-consumer.sh --bootstrap-server &lt;broker地址&gt; --topic &lt;topic名&gt; --from-beginning --max-messages 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="从指定offset消费一条消息"><a href="#从指定offset消费一条消息" class="headerlink" title="从指定offset消费一条消息"></a>从指定offset消费一条消息</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-consumer.sh --bootstrap-server &lt;broker地址&gt; --topic &lt;topic名&gt; --partition &lt;分区号&gt; --offset &lt;指定offset&gt; --max-messages 1</span><br></pre></td></tr></table></figure>
+
 
         </div>
 
@@ -352,7 +358,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E6%B6%88%E8%B4%B9%E6%83%85%E5%86%B5"><span class="nav-text">查看消费者组消费情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%90%8D"><span class="nav-text">查询所有消费者组名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2topic%E5%90%84%E5%88%86%E5%8C%BA%E6%B6%88%E8%B4%B9%E6%83%85%E5%86%B5"><span class="nav-text">查询topic各分区消费情况</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E6%B6%88%E8%B4%B9%E6%83%85%E5%86%B5"><span class="nav-text">查看消费者组消费情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E5%90%8D"><span class="nav-text">查询所有消费者组名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2topic%E5%90%84%E5%88%86%E5%8C%BA%E6%B6%88%E8%B4%B9%E6%83%85%E5%86%B5"><span class="nav-text">查询topic各分区消费情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E6%9C%80%E6%96%B0%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF%EF%BC%88%E4%B8%8D%E6%98%AF%E8%80%81%E6%B6%88%E6%81%AF%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E6%9D%A1%EF%BC%89"><span class="nav-text">消费最新产生的一条消息（不是老消息的最后一条）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E6%9C%80%E6%97%A9%E7%9A%84%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF"><span class="nav-text">消费最早的一条消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%8C%87%E5%AE%9Aoffset%E6%B6%88%E8%B4%B9%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF"><span class="nav-text">从指定offset消费一条消息</span></a></li></ol>
     </div>
 </div>
         </aside>
