@@ -168,120 +168,885 @@
             <div class="main-content">
 
                 
-                    .home-content-container {
-  background: var(--background-color);
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/54/">
+                        华为Dws 运维手册
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        查询表的分区1SELECT relname FROM pg_partition p where p.parentid=&#x27;表名&#x27;::regclass;
+
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Aug 28 2025 09:45:00 GMT+0000">2025-08-28</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/54/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/42305/">
+                        Kafka 运维手册
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        查看消费者组消费情况1./kafka-consumer-groups.sh --bootstrap-server 192.168.1.65:9092 --describe --group 消费者组
+
+查询所有消费者组名1./kafka-consume...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 28 2025 17:29:00 GMT+0000">2025-04-28</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/42305/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/38103/">
+                        Java 运维手册
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        查看对内存情况1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950jhsdb jmap --heap --pid 1At...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 28 2025 11:50:00 GMT+0000">2025-04-28</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Java/">Java</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/38103/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/21099/">
+                        MySQL 运维手册
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        查看平均每行数据字节数1234SELECT *FROM information_schema.tablesWHERE table_schema = &#x27;数据库名&#x27;  AND table_name = &#x27;表名&#x27;;
 
 
-  .home-article-list {
+                    
+                </div>
 
-    .home-article-item {
-      position: relative;
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Apr 24 2025 15:56:00 GMT+0000">2025-04-24</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/MySQL/">MySQL</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
 
-      keep-container(true, 1.015, 1.015, 28px, 38px);
+    <a href="/posts/21099/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
 
-      .top-icon {
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        font-size: 1.2rem;
-        transform: rotate(45deg);
-        color: var(--third-text-color);
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/43698/">
+                        ADB PostgreSQL 运维手册
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        查询表的分区123456789SELECT     parent.relname as table_name,    child.relname as partition_name,    pg_get_expr(child.relpartbound...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Apr 24 2025 15:29:00 GMT+0000">2025-04-24</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/43698/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/10131/">
+                        Arthas 查看方法耗时
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        文档快速入门
+profiler 采集
+命令123456curl -O https://arthas.aliyun.com/arthas-boot.jarjava -jar arthas-boot.jar-- 持续120秒，每10ms采集一次，统计耗时...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Apr 22 2025 13:40:00 GMT+0000">2025-04-22</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Java/">Java</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/10131/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/60744/">
+                        centos7 更换源
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        1234mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bakcurl -o /etc/yum.repos.d/CentOS-Base.repo http:...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Apr 07 2025 15:50:00 GMT+0000">2025-04-07</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/60744/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/46510/">
+                        Mac Docker安装Kafka（无需zookeeper）
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        命令12345678910docker run -d --name kafka \  --platform linux/arm64 \  -p 9092:9092 \  -e KAFKA_CFG_PROCESS_ROLES=&quot;broker,...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 12 2025 17:35:00 GMT+0000">2025-03-12</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/46510/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/58933/">
+                        kafka消费者重启，消息重复消费
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        问题描述kafka的topic在消费完毕一段时间后，重启消费者（auto.offset.reset=earliest`），会重新消费所有消息。
+问题产生原因是offset信息过期导致的。我一直以为消费者保持在线，最新位移信息是不会过期的。但即使消费者...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Dec 31 2024 09:32:00 GMT+0000">2024-12-31</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/58933/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/40782/">
+                        Mac m1 Docker 搭建 Greenplum
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        一、启动12345678docker run -d \  --name gp \  -h gpdbsne \  -p 5432:5432 \  -p 28080:28080 \  -e MASTER_PASSWORD=gpadmin \  --pri...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Nov 22 2024 15:58:00 GMT+0000">2024-11-22</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/40782/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/34010/">
+                        centos 安装docker
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        一、更新包1yum upgrade
+
+二、安装依赖1sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+三、设置yum源1yum-config-manager --add...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Jul 25 2024 21:16:00 GMT+0000">2024-07-25</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Docker/">Docker</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/34010/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/45946/">
+                        移除 macOS 中被企业策略强制安装的 Chrome 插件扩展的方法
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        公司配发的 Macbook 安装了一些监控软件，毕竟是办公设备，这点倒是无可厚非。但是，其中的 Forcepoint DLP Endpoint 会向日常使用的主力浏览器 Chrome 中安装一个 WebsenEndpoint 的扩展插件。
+这个插件的...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue May 07 2024 09:17:00 GMT+0000">2024-05-07</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">开发实用技巧</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/45946/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/68/">
+                        Centos 安装 nginx
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        运行命令1yum install -y nginx
 
 
-        +keep-tablet() {
-          font-size: 1.16rem;
-        }
-      }
+                    
+                </div>
 
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Feb 27 2024 16:42:00 GMT+0000">2024-02-27</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Nginx/">Nginx</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
 
-      .home-article-title {
-        position: relative;
-        font-weight: 600;
-        font-size: 1.4rem;
-        line-height: 1.5;
-        color: var(--second-text-color);
+    <a href="/posts/68/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
 
+            </li>
+        
+            <li class="home-article-item">
 
-        +keep-tablet() {
-          font-size: 1.3rem;
-        }
+                
 
+                <h3 class="home-article-title">
+                    <a href="/posts/355/">
+                        centos 安装openjdk17
+                    </a>
+                </h3>
 
-        +keep-mobile() {
-          font-size: 1.2rem;
-        }
+                <div class="home-article-content markdown-body">
+                    
+                        运行命令1sudo yum install java-17-openjdk
 
-        margin: 0;
+文档
 
-      }
+                    
+                </div>
 
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Feb 27 2024 16:37:00 GMT+0000">2024-02-27</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
 
-      .home-article-content {
-        word-wrap: break-word;
-        text-align: justify;
-        margin: 20px 0;
-        color: var(--default-text-color);
-      }
+    <a href="/posts/355/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
 
+            </li>
+        
+            <li class="home-article-item">
 
-      .home-article-meta-info-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.92rem;
-        color: var(--third-text-color);
+                
 
+                <h3 class="home-article-title">
+                    <a href="/posts/6401/">
+                        Nguni 部署 Vue项目
+                    </a>
+                </h3>
 
-        .home-article-meta-info {
-          letter-spacing: 0.5px;
+                <div class="home-article-content markdown-body">
+                    
+                        一、Vue 项目配置1. 路由配置router/index.js 文件中配置 base，这里配置为了 /admin/
+12345678const createRouter = () =&gt; new Router(&#123;  mode: &#x...
+                    
+                </div>
 
-          span {
-            margin-right: 10px;
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Feb 20 2024 09:29:00 GMT+0000">2024-02-20</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Nginx/">Nginx</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
 
-            &:last-child {
-              margin-right: 0;
-            }
+    <a href="/posts/6401/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
 
-            ul, li {
-              display: inline;
-            }
-          }
+            </li>
+        
+            <li class="home-article-item">
 
-          .home-article-category {
-            +keep-mobile() {
-              display: none;
-            }
-          }
+                
 
-          .home-article-tag {
-            +keep-tablet() {
-              display: none;
-            }
-          }
-        }
+                <h3 class="home-article-title">
+                    <a href="/posts/4657/">
+                        AtomicInteger实现边界值控制
+                    </a>
+                </h3>
 
+                <div class="home-article-content markdown-body">
+                    
+                        代码123456789101112public static int incrAndGet(final AtomicInteger number, final int threshold) &#123;  while (true) &#123;   ...
+                    
+                </div>
 
-        hr {
-          border: none;
-          flex: 1;
-          height: 1px;
-          background: var(--border-color);
-          margin: 0 10px;
-        }
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jan 23 2024 10:13:00 GMT+0000">2024-01-23</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Java/">Java</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
 
-        a {
-          color: var(--third-text-color);
+    <a href="/posts/4657/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
 
-          &:hover {
-            color: var(--primary-color)
-          }
-        }
-      }
+            </li>
+        
+            <li class="home-article-item">
 
+                
 
-    }
-  }
-}
+                <h3 class="home-article-title">
+                    <a href="/posts/19656/">
+                        Spring Security 权限注解在方法上进行权限认证多种方式
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        一、新建安全配置类Spring Security 默认是禁用注解的，要想开启注解，要在继承WebSecurityConfigurerAdapter的类加@EnableMethodSecurity注解，并在该类中将AuthenticationManag...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Jan 22 2024 10:37:00 GMT+0000">2024-01-22</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Spring/">Spring</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/19656/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/35604/">
+                        sbt 仓库配置
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        一、新增身份认证配置文件新建 /Users/jd/.sbt/.credentials
+内容：
+1234realm=Sonatype Nexus Repository Managerhost=ci.yunat.comuser=di.jiapasswor...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Nov 09 2023 15:48:00 GMT+0000">2023-11-09</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">开发实用技巧</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/35604/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/5491/">
+                        Mac Docker 搭建 Doris
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        一、安装 mac-docker-connectorGithub：https://github.com/wenjunxiao/mac-docker-connector/blob/master/README-ZH.md
+安装 mac-docker-con...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Oct 10 2023 16:54:00 GMT+0000">2023-10-10</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/5491/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/28720/">
+                        maven 指定编译版本
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        javac先从 javac 的编译选项 -source、 -target 说起：
+
+-source：指定使用什么版本的 JDK 语法编译源代码。
+-target：指定生成特定于某个 JDK 版本的 class 文件。高版本的 class 文件不被低版...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Sep 19 2023 16:32:00 GMT+0000">2023-09-19</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">开发实用技巧</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/28720/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator">
+        <div class="paginator">
+    
+
+    
+        <a class="next btn"
+           href="/page/2/"
+        >Next</a>
+    
+</div>
+
+    </div>
+</div>
 
 
                 

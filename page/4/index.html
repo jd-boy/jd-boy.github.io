@@ -144,120 +144,969 @@
             <div class="main-content">
 
                 
-                    .home-content-container {
-  background: var(--background-color);
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/27329/">
+                        Linux 定时执行任务
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        编辑定时任务1crontab -e
 
 
-  .home-article-list {
+                    
+                </div>
 
-    .home-article-item {
-      position: relative;
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Dec 05 2022 22:49:45 GMT+0000">2022-12-05</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Linux/">Linux</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
 
-      keep-container(true, 1.015, 1.015, 28px, 38px);
+    <a href="/posts/27329/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
 
-      .top-icon {
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        font-size: 1.2rem;
-        transform: rotate(45deg);
-        color: var(--third-text-color);
+            </li>
+        
+            <li class="home-article-item">
 
+                
 
-        +keep-tablet() {
-          font-size: 1.16rem;
-        }
-      }
+                <h3 class="home-article-title">
+                    <a href="/posts/56705/">
+                        Java 与线程
+                    </a>
+                </h3>
 
+                <div class="home-article-content markdown-body">
+                    
+                        一、线程的实现我们知道，线程是比进程更轻量级的调度执行单位，线程的引入，可以把一个进程的资源分配和执行调度分开，各个线程既可以共享进程资源(内存地址、文件I/O等)，又可以独立调度。目前线程是 Java 里面进行处理器资源调度的最基本单位，不过如果日...
+                    
+                </div>
 
-      .home-article-title {
-        position: relative;
-        font-weight: 600;
-        font-size: 1.4rem;
-        line-height: 1.5;
-        color: var(--second-text-color);
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Dec 01 2022 21:53:59 GMT+0000">2022-12-01</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Java/">Java</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/Java/JVM/">JVM</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%88%E7%AC%AC%E4%B8%89%E7%89%88%EF%BC%89/">深入理解JVM虚拟机（第三版）</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
 
+    <a href="/posts/56705/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
 
-        +keep-tablet() {
-          font-size: 1.3rem;
-        }
+            </li>
+        
+            <li class="home-article-item">
 
+                
 
-        +keep-mobile() {
-          font-size: 1.2rem;
-        }
+                <h3 class="home-article-title">
+                    <a href="/posts/4836/">
+                        Prometheus 监控 K8S 集群
+                    </a>
+                </h3>
 
-        margin: 0;
-
-      }
-
-
-      .home-article-content {
-        word-wrap: break-word;
-        text-align: justify;
-        margin: 20px 0;
-        color: var(--default-text-color);
-      }
-
-
-      .home-article-meta-info-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.92rem;
-        color: var(--third-text-color);
-
-
-        .home-article-meta-info {
-          letter-spacing: 0.5px;
-
-          span {
-            margin-right: 10px;
-
-            &:last-child {
-              margin-right: 0;
-            }
-
-            ul, li {
-              display: inline;
-            }
-          }
-
-          .home-article-category {
-            +keep-mobile() {
-              display: none;
-            }
-          }
-
-          .home-article-tag {
-            +keep-tablet() {
-              display: none;
-            }
-          }
-        }
-
-
-        hr {
-          border: none;
-          flex: 1;
-          height: 1px;
-          background: var(--border-color);
-          margin: 0 10px;
-        }
-
-        a {
-          color: var(--third-text-color);
-
-          &:hover {
-            color: var(--primary-color)
-          }
-        }
-      }
+                <div class="home-article-content markdown-body">
+                    
+                        下表中，梳理了监控Kubernetes集群监控的各个维度以及策略：
 
 
-    }
-  }
-}
+
+目标
+服务发现模式
+监控方法
+数据源
+
+
+
+从集群各节点kubelet组件中获取节点kubelet的基本运行状态的监控指标
+node
+白盒监控
+kubelet
+
+
+从集群各节点...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Nov 29 2022 17:56:41 GMT+0000">2022-11-29</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Prometheus/">Prometheus</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/4836/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/23567/">
+                        Prometheus 实现 K8S POD 服务发现
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        一、添加配置在 prometheus.yml 中添加如下配置：
+123456789101112131415161718192021222324- job_name: &#x27;kubernetes-pods&#x27;  kubernetes_sd...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Nov 29 2022 16:41:35 GMT+0000">2022-11-29</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Prometheus/">Prometheus</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/23567/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/53061/">
+                        Leaf——美团点评分布式ID生成系统
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        美团博客：https://tech.meituan.com/2017/04/21/mt-leaf.html
+Github：https://github.com/Meituan-Dianping/Leaf
+
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Nov 29 2022 10:06:45 GMT+0000">2022-11-29</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/53061/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/29341/">
+                        K8s可视化监控之 Weave Scope
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        官方文档：https://www.weave.works/docs/scope/latest/installing/
+GitHub：https://github.com/weaveworks/scope
+一、背景在生成环境中k8s应用部署众多，需要一...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Nov 28 2022 09:20:20 GMT+0000">2022-11-28</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Kubernetes/">Kubernetes</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/29341/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/34115/">
+                        Kubernetes 性能问题分析报告
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        生产环境的 Kubernetes 上运行的服务，相对比在同一台服务器上直接以JVM进程运行，性能下降了约30%。本文记录了查找性能下降原因的过程，以及结论。
+1、实验环境1.1 压测客户端服务器：192.168.203.135
+软件：wrk-4.2....
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Nov 27 2022 18:35:20 GMT+0000">2022-11-27</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Kubernetes/">Kubernetes</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/34115/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/56412/">
+                        Linux 创建 root 权限用户
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        1.创建用户1adduser demo
+
+2.修改密码1234# passwd demoChanging password for user rta.New password:Retype new password:
+
+3.添加 root 权限在 /...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Nov 25 2022 18:45:50 GMT+0000">2022-11-25</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Linux/">Linux</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/56412/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/14340/">
+                        wrk 压测工具
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Github
+其他资料：https://www.cnblogs.com/quanxiaoha/p/10661650.html
+一、安装Mac 安装1brew install wrk
+
+Docker 运行https://hub.docker.com/r...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Nov 24 2022 16:51:59 GMT+0000">2022-11-24</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%B5%8B%E8%AF%95/">测试</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/14340/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/19043/">
+                        Redis Scan 原理解析与踩坑
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        1. 概述由于 Redis 是单线程在处理用户的命令，而 Keys 命令会一次性遍历所有 Key，于是在 命令执行过程中，无法执行其他命令。这就导致如果 Redis 中的 key 比较多，那么 Keys 命令执行时间就会比较长，从而阻塞 Redis。...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Nov 17 2022 22:00:00 GMT+0000">2022-11-17</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Redis/">Redis</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/19043/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/3431/">
+                        Redis 内存碎片化率
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        一、查看 Redis 内存占用情况12345678910111213141516171819202122232425redis-cli -p 6379 info memory# Memoryused_memory:1073741736used_mem...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Nov 16 2022 21:35:40 GMT+0000">2022-11-16</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Redis/">Redis</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/3431/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/11448/">
+                        Micrometer 实现度量和监控
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Micrometer提供的度量类库Meter是指一组用于收集应用中的度量数据的接口，Meter单词可以翻译为”米”或者”千分尺”，但是显然听起来都不是很合理，因此下文直接叫Meter，直接当成一个专有名词，理解它为度量接口即可。Meter是由Mete...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Nov 13 2022 21:17:30 GMT+0000">2022-11-13</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E5%AE%9E%E7%94%A8%E7%B1%BB%E5%BA%93/">实用类库</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/%E7%9B%91%E6%8E%A7/">监控</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/posts/11448/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/56907/">
+                        SpringBoot actuator 调整日志级别
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        发送请求
+1curl &#x27;http://localhost:8080/actuator/loggers/org.jd.kafka.KafkaManager&#x27; -i -X POST -H &#x27;Content-Type: app...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Nov 07 2022 09:05:36 GMT+0000">2022-11-07</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Spring/">Spring</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/56907/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/19466/">
+                        Java 实现 HmacSHA256
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        1234567891011@SneakyThrowspublic static String hmacSHA256(String origin, String secret) &#123;  Mac hmacSHA256 = Mac.getInsta...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Nov 01 2022 11:37:15 GMT+0000">2022-11-01</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Java/">Java</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/19466/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/34610/">
+                        expect 登陆脚本
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        1 安装expect工具expect是建立在tcl基础上的一个自动化交互套件, 在一些需要交互输入指令的场景下, 可通过脚本设置自动进行交互通信. 其交互流程是:
+spawn启动指定进程 -&gt; expect获取指定关键字 -&gt; send想...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Oct 27 2022 15:41:16 GMT+0000">2022-10-27</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Linux/">Linux</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/34610/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/59508/">
+                        混沌测试工具
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        为什么需要混沌测试？随着计算机技术的发展，系统架构从集中式演进到分布式。分布式系统相对于单台机器来说提供了更好的可扩展性，容错性以及更低的延迟，但在单台计算机上运行软件和分布式系统上运行软件却有着根本的区别，其中一点便是单台计算机上运行软件，错误是可...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Oct 16 2022 20:31:13 GMT+0000">2022-10-16</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E6%B5%8B%E8%AF%95/">测试</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/59508/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/2309/">
+                        shell 中脚本参数传递的两种方式
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        方式一：$0,$1,$2..采用$0,$1,$2..等方式获取脚本命令行传入的参数，值得注意的是，$0获取到的是脚本路径以及脚本名，后面按顺序获取参数，当参数超过10个时(包括10个)，需要使用${10},${11}….才能获取到参数，但是一般很少会...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Oct 16 2022 15:34:17 GMT+0000">2022-10-16</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Linux/">Linux</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/2309/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/36705/">
+                        Log4j2 监控 Disruptor RingBuffer 容量
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        参考文章
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859import io.m...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Oct 09 2022 22:25:45 GMT+0000">2022-10-09</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Java/">Java</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/36705/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/43872/">
+                        Linux 查看磁盘IO读写情况
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        一、iostat1yum install -y sysstat
+
+二、iotop1yum install -y iotop
+
+当前 IO 情况1iotop -oP
+
+查看某个进程的 IO 情况1iotop -p $PID -d 1
+
+三、pidsta...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Oct 09 2022 22:10:34 GMT+0000">2022-10-09</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Linux/">Linux</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/43872/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/posts/57336/">
+                        Linux TIME_WAIT 相关系统参数
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Linux TIME_WAIT 主要有三个相关参数:
+
+net.ipv4.tcp_tw_reuse = 1
+表示开启重用。允许将 TIME-WAIT sockets 重新用于新的TCP连接，默认为0，表示关闭
+
+
+net.ipv4.tcp_tw_re...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Oct 08 2022 01:34:36 GMT+0000">2022-10-08</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                        </li>
+                    
+                    
+                        <li>
+                            &gt; 
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/Linux/">Linux</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+    </div>
+
+    <a href="/posts/57336/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator">
+        <div class="paginator">
+    
+        <a class="prev btn"
+           href="/page/3/"
+        >Prev</a>
+    
+
+    
+        <a class="next btn"
+           href="/page/5/"
+        >Next</a>
+    
+</div>
+
+    </div>
+</div>
 
 
                 
