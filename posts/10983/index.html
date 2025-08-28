@@ -176,7 +176,15 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/MySQL/">MySQL</a>&nbsp;
+                        <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/">MySQL</a>&nbsp;
                     </li>
                 
             </ul>
@@ -202,14 +210,14 @@
         <div class="article-content markdown-body">
             <p><a class="link"   target="_blank" rel="noopener" href="http://catkang.github.io/2018/08/31/isolation-level.html" >数据库事务隔离发展标准<i class="fas fa-external-link-alt"></i></a>一文中，从标准制定的角度介绍了数据库的隔离级别，介绍了Read Uncommitted、Read Committed、Repeatable Read、Serializable等隔离级别的定义。本文就来看看究竟有哪些常见的实现事务隔离的机制，称之为并发控制（Concurrency Control）。</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>所谓<strong>并发控制，就是保证并发执行的事务在某一<a class="link"   target="_blank" rel="noopener" href="http://catkang.github.io/2018/08/31/isolation-level.html" >隔离级别<i class="fas fa-external-link-alt"></i></a>上的正确执行的机制</strong>。需要指出的是并发控制由数据库的调度器负责，事务本身并不感知，如下图所示，Scheduler将多个事务的读写请求，排列为合法的序列，使之依次执行：</p>
-<p><img src="../../imgs/MySQL/m6.svg" alt="Scheduler-7328992"></p>
+<p><img src="../../../../imgs/MySQL/m6.svg" alt="Scheduler-7328992"></p>
 <p>这个过程中，对可能破坏数据正确性的冲突事务，调度器可能选择下面两种处理方式：</p>
 <ul>
 <li>Delay：延迟某个事务的执行到合法的时刻</li>
 <li>Abort：直接放弃事务的提交，并回滚该事务可能造成的影响</li>
 </ul>
 <p>可以看出Abort比Delay带来更高的成本，接下来我们就介绍不同的并发控制机制在不同情况下的处理方式。</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><img src="../../imgs/MySQL/m7.svg" alt="Concurrency Control"></p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p><img src="../../../../imgs/MySQL/m7.svg" alt="Concurrency Control"></p>
 <p>这里从两个维度，对常见的并发控制机制进行分类：</p>
 <h4 id="1-乐观程度"><a href="#1-乐观程度" class="headerlink" title="1. 乐观程度"></a>1. 乐观程度</h4><p>不同的实现机制，基于不同的对发生冲突概率的假设，悲观方式认为只要两个事务访问相同的数据库对象，就一定会发生冲突，因而应该尽早阻止；而乐观的方式认为，冲突发生的概率不大，因此会延后处理冲突的时机。如上图横坐标所示，乐观程度从左向右增高：</p>
 <ul>
@@ -221,9 +229,9 @@
 <h4 id="2-单版本-VS-多版本"><a href="#2-单版本-VS-多版本" class="headerlink" title="2. 单版本 VS 多版本"></a>2. 单版本 VS 多版本</h4><p>如上图纵坐标所示，相同的乐观程度下，还存在多版本的实现。所谓多版本，就是在每次需要对数据库对象修改时，生成新的数据版本，每个对象的多个版本共存。读请求可以直接访问对应版本的数据，从而避免读写事务和只读事务的相互阻塞。当然多版本也会带来对不同版本的维护成本，如需要垃圾回收机制来释放不被任何事物可见的版本。</p>
 <p>需要指出的是这些并发控制机制并不与具体的隔离级别绑定，通过冲突判断的不同规则，可以实现不同强度的隔离级别，下面基于Serializable具体介绍每种机制的实现方式。</p>
 <h2 id="基于Lock"><a href="#基于Lock" class="headerlink" title="基于Lock"></a>基于Lock</h2><p>基于Lock实现的Scheduler需要在事务访问数据前加上必要的锁保护，为了提高并发，会根据实际访问情况分配不同模式的锁，常见的有读写锁，更新锁等。最简单地，需要长期持有锁到事务结束，为了尽可能的在保证正确性的基础上提高并行度，数据库中常用的加锁方式称为<strong>两阶段锁（2PL）</strong>，Growing阶段可以申请加锁，Shrinking阶段只能释放，即在第一次释放锁之后不能再有任何加锁请求。需要注意的是2PL并不能解决死锁的问题，因此还需要有死锁检测及处理的机制，通常是选择死锁的事务进行Abort。</p>
-<p><img src="../../imgs/MySQL/m8.png" alt="image-20180918152859757"></p>
+<p><img src="../../../../imgs/MySQL/m8.png" alt="image-20180918152859757"></p>
 <p>Scheduler对冲突的判断还需要配合<strong>Lock Table</strong>，如下图所示是一个可能得Lock Table信息示意，每一个被访问的数据库对象都会在Lock Table中有对应的表项，其中记录了当前最高的持有锁的模式、是否有事务在Delay、以及持有或等待对应锁的事务链表；同时对链表中的每个事务记录其事务ID，请求锁的模式以及是否已经持有该锁。Scheduler会在加锁请求到来时，通过查找Lock Table判断能否加锁或是Delay，如果Delay需要插入到链表中。对应的当事务Commit或Abort后需要对其持有的锁进行释放，并按照不同的策略唤醒等待队列中Delay的事务。</p>
-<p><img src="../../imgs/MySQL/m9.png" alt="image-20180918115909934"></p>
+<p><img src="../../../../imgs/MySQL/m9.png" alt="image-20180918115909934"></p>
 <h2 id="基于Timestamp"><a href="#基于Timestamp" class="headerlink" title="基于Timestamp"></a>基于Timestamp</h2><p>基于Timestamp的Scheduler会在事务开始时候分配一个全局自增的Timestamp，这个Timestamp通常由物理时间戳或系统维护的自增id产生，用于区分事务开始的先后。同时，每个数据库对象需要增加一些额外的信息，这些信息会由对应的事务在访问后更新，包括:</p>
 <ul>
 <li>RT(X): 最大的读事务的Timestamp</li>
@@ -245,7 +253,7 @@
 <li>Validate阶段：对比当前事务与其他有时间重叠的事务的读写集合，判断能否提交；</li>
 <li>Write阶段：若Validate成功，进入Write阶段，这里才真正写入数据库。</li>
 </ul>
-<p><img src="../../imgs/MySQL/m10.png" alt="image-20180918164913619"></p>
+<p><img src="../../../../imgs/MySQL/m10.png" alt="image-20180918164913619"></p>
 <p>同时，Scheduler会记录每个事务的开始时间START(T)，验证时间VAL(T)，完成写入时间FIN(T)</p>
 <p><strong>基于Validataion的方式假设事务Validation的顺序就是事务执行的顺序</strong>，因此验证的时候需要检查访问数据顺序可能得不一致：</p>
 <ul>
@@ -258,7 +266,7 @@
 <li>begin-ts及end-ts分别记录该版本创建和过期时的事务TID</li>
 <li>pointer: 指向该对象其他版本的链表</li>
 </ul>
-<p><img src="../../imgs/MySQL/m11.svg" alt="MVCC"></p>
+<p><img src="../../../../imgs/MySQL/m11.svg" alt="MVCC"></p>
 <p>其基本的实现思路是，每次对数据库对象的写操作都生成一个新的版本，用自己的TID标记新版本begin-ts及上一个版本的end-ts，并将自己加入链表。读操作对比自己的TID与数据版本的begin-ts，end-ts，找到其可见最新的版本进行访问。根据乐观程度多版本的机制也分为三类：</p>
 <h4 id="1-Two-phase-Locking-MV2PL"><a href="#1-Two-phase-Locking-MV2PL" class="headerlink" title="1. Two-phase Locking (MV2PL)"></a>1. Two-phase Locking (MV2PL)</h4><p>与单版本的2PL方式类似，同样需要Lock Table跟踪当前的加锁及等待信息，另外给数据库对象增加了多版本需要的begin-ts和end-ts信息。写操作需要对最新的版本加写锁，并生成新的数据版本。读操作对找到的最新的可见版本加读锁访问。</p>
 <h4 id="2-Timestamp-Ordering-MVTO"><a href="#2-Timestamp-Ordering-MVTO" class="headerlink" title="2. Timestamp Ordering (MVTO)"></a>2. Timestamp Ordering (MVTO)</h4><p>对比单版本的Timestamp方式对每个数据库对象记录的Read TimeStamp(RT)，Write TimeStamp(WT)，Commited flag(C)信息外增加了标识版本的begin-ts和end-ts，同样在事务开始前获得唯一递增的Start TimeStamp（TS），写事务需要对比自己的TS和可见最新版本的RT来验证顺序，写入是创建新版本，并用自己的TS标记新版本的WT，不同于单版本，这个WT信息永不改变。读请求读取自己可见的最新版本，并在访问后修改对应版本的RT，同样通过判断C flag信息避免Read Uncommitted。</p>
