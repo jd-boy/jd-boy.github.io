@@ -180,7 +180,11 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/Redis/">Redis</a>&nbsp;
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/">Redis</a>&nbsp;
                     </li>
                 
             </ul>
@@ -258,7 +262,7 @@
 <p>极限一点，<strong>Count 参数和总 Key 数一致时，Scan 命令就和 Keys 效果一样了</strong>。</p>
 </blockquote>
 <p>Count 大小和 Scan 总耗时的关系如下图：</p>
-<p><img src="../../../imgs/Redis/redis23.png"></p>
+<p><img src="../../../../imgs/Redis/redis23.png"></p>
 <p>可以发现 Count 越大，总耗时就越短，不过越后面提升就越不明显了。</p>
 <blockquote>
 <p>所以推荐的 Count 大小为 1W 左右。</p>
@@ -300,7 +304,7 @@
 <p>因此，游标的实现需要兼顾以上三种情况。上述三种情况下游标实现的要求如下：</p>
 <p><strong>第一种情况比较简单</strong>。假设redis的hash表大小为4，第一个游标为0，读取第一个bucket的数据，然后游标返回2，下次读取bucket 2 ，依次遍历。</p>
 <p><strong>第二种情况更复杂</strong>。假设redis的hash表大小为4，如果rehash后大小变成8。如果如上返回游标(即返回2)，则显示下图：</p>
-<p><img src="../../../imgs/Redis/redis24.png"></p>
+<p><img src="../../../../imgs/Redis/redis24.png"></p>
 <p>假设bucket 0读取后返回到cursor 2，当客户端再次Scan cursor 2时，hash表已经被rehash，大小翻倍到8，redis计算一个key bucket如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hash(key)&amp;(size<span class="number">-1</span>) </span><br></pre></td></tr></table></figure>
 
@@ -321,7 +325,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v |= ~m0; <span class="comment">// 将游标v的unmarsked 比特都置为1</span></span><br><span class="line">v = rev(v);<span class="comment">// 反转v</span></span><br><span class="line">v++; <span class="comment">//这个是关键，加1，对一个数加1，其实就是将这个数的低位的连续1变为0，然后将最低的一个0变为1，其实就是将最低的一个0变为1</span></span><br><span class="line">v = rev(v);<span class="comment">//再次反转，即得到下一个游标值</span></span><br></pre></td></tr></table></figure>
 
 <p>代码逻辑非常简单，计算过程如下：</p>
-<p><img src="../../../imgs/Redis/redis25.png"></p>
+<p><img src="../../../../imgs/Redis/redis25.png"></p>
 <ul>
 <li>大小为 4 时，游标状态转换为 0-2-1-3。</li>
 <li>当大小为 8 时，游标状态转换为 0-4-2-6-1-5-3-7。</li>

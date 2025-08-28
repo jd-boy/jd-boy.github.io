@@ -180,7 +180,11 @@
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/Redis/">Redis</a>&nbsp;
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/">Redis</a>&nbsp;
                     </li>
                 
             </ul>
@@ -204,7 +208,7 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="1-Ziplist-结构"><a href="#1-Ziplist-结构" class="headerlink" title="1. Ziplist 结构"></a>1. Ziplist 结构</h1><p><img src="../../../imgs/Redis/redis1.png" alt="ziplist结构"></p>
+            <h1 id="1-Ziplist-结构"><a href="#1-Ziplist-结构" class="headerlink" title="1. Ziplist 结构"></a>1. Ziplist 结构</h1><p><img src="../../../../imgs/Redis/redis1.png" alt="ziplist结构"></p>
 <h2 id="zlbytes"><a href="#zlbytes" class="headerlink" title="zlbytes"></a>zlbytes</h2><p>无符号 4 字节整数，保存 <strong>ziplist</strong> 内存大小。</p>
 <p>通过 <strong>zlbytes</strong> 可以直接对 <strong>ziplist</strong> 的内存大小进行调整，无需遍历整个列表。</p>
 <h2 id="zltail"><a href="#zltail" class="headerlink" title="zltail"></a>zltail</h2><p>压缩列表最后一个 <strong>entry</strong> 距离起始地址的偏移量，占 4 个字节。</p>
@@ -223,7 +227,7 @@
 <li><strong>前节点长度小于254：</strong>prevlen长度 1 字节，用于存储前节点长度；</li>
 <li><strong>前节点长度大于254：</strong>prevlen长度为 5 字节，第一个字节设置为 254，后面 4 个字节存储前节点长度。</li>
 </ul>
-<p><img src="../../../imgs/Redis/redis2.jpg" alt="20201227213614286"></p>
+<p><img src="../../../../imgs/Redis/redis2.jpg" alt="20201227213614286"></p>
 <p><strong>prevlen</strong> 属性主要用于 <strong>反向遍历</strong>。</p>
 <p>通过 <strong>zltial</strong>，可以得到最后一个节点位置，获取到前一个节点 <strong>prevlen</strong> ，指针向前移动即可指向倒数第二个节点。以此类推。</p>
 <h3 id="（3）encoding"><a href="#（3）encoding" class="headerlink" title="（3）encoding"></a>（3）encoding</h3><p>记录了节点中 <strong>data</strong> 的 <strong>数据类型</strong> 和 <strong>长度</strong>。</p>
@@ -237,9 +241,9 @@
 <li><strong>2^6 &lt;= 长度 &lt; 2^14：</strong>以 <strong>01</strong> 开头，后续 6 位 + 下一个字节的 8 位（共14位），表示 <strong>data</strong> 长度；</li>
 <li><strong>2^14 &lt;= 长度 &lt; 2^32：</strong>以 <strong>10</strong> 开头，后续 6 位不用，从下一个字节开始，连续 32 位 表示 <strong>data</strong> 长度。</li>
 </ul>
-<p><img src="../../../imgs/Redis/redis3.jpg"></p>
+<p><img src="../../../../imgs/Redis/redis3.jpg"></p>
 <h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p>如果 <strong>encoding</strong> 以 <strong>11</strong> 开头，表示数据类型为整数。</p>
-<p><img src="../../../imgs/Redis/redis4.jpg"></p>
+<p><img src="../../../../imgs/Redis/redis4.jpg"></p>
 <p>看了上图的最后一个类型，可能有小伙伴就有疑问：为啥没有 <code>11111111</code> ？<br>答：因为 <code>11111111</code> 表示 <code>zlend</code> (十进制的 <code>255</code>，十六进制的 <code>oxff</code>)</p>
 <h3 id="（4）data"><a href="#（4）data" class="headerlink" title="（4）data"></a>（4）data</h3><p><strong>data</strong> 表示真实存的数据的 byte数组，可以是 <strong>字符串</strong> 或者 <strong>整数</strong>，从编码可以得知类型和长度。知道长度，就知道 <strong>data</strong> 的起始位置了。</p>
 <p>比较特殊的是，整数 <code>1 ~ 13</code> (<code>0001 ~ 1101</code>)，因为比较短，刚好可以塞在 <code>encoding</code> 字段里面，所以就没有 <strong>data</strong>。</p>
