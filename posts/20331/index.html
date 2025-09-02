@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="JD">
+    
+    <title>
+        
+            LangChain4j 构建AI项目 |
+        
+        Bean You
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"jzcupid.cn","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/favicon.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"莫听穿林打叶声，何妨吟啸且徐行。"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"trigger":"auto","preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Bean You
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">LangChain4j 构建AI项目</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">JD</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2025-09-02 17:52:00
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/AI/">AI</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="一、依赖"><a href="#一、依赖" class="headerlink" title="一、依赖"></a>一、依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dev.langchain4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>langchain4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dev.langchain4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>langchain4j-open-ai<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- langchain RAG依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dev.langchain4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>langchain4j-easy-rag<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.0-beta10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dev.langchain4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>langchain4j-mcp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.0-beta10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- langchain 流式对话 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dev.langchain4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>langchain4j-reactor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.0-beta10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、配置AI"><a href="#二、配置AI" class="headerlink" title="二、配置AI"></a>二、配置AI</h2><h3 id="实现一个自定义监听"><a href="#实现一个自定义监听" class="headerlink" title="实现一个自定义监听"></a>实现一个自定义监听</h3><p>可以查看到模型的请求和响应。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cn.hutool.core.collection.CollUtil;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.agent.tool.ToolExecutionRequest;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.message.AiMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.message.ChatMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.chat.listener.ChatModelListener;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.chat.listener.ChatModelResponseContext;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.chat.response.ChatResponse;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> JD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2025/8/27 15:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultChatModelListener</span> <span class="keyword">implements</span> <span class="title">ChatModelListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(ChatModelResponseContext responseContext)</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; reqMsgs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (ChatMessage message : responseContext.chatRequest().messages()) &#123;</span><br><span class="line">      reqMsgs.add(message.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    ChatResponse chatResponse = responseContext.chatResponse();</span><br><span class="line">    AiMessage aiMessage = chatResponse.aiMessage();</span><br><span class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    sb.append(<span class="string">&quot;text: 【&quot;</span>).append(aiMessage.text()).append(<span class="string">&quot;】\n&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (CollUtil.isNotEmpty(aiMessage.toolExecutionRequests())) &#123;</span><br><span class="line">      sb.append(<span class="string">&quot;toolExecutionRequests: [\n&quot;</span>);</span><br><span class="line">      <span class="keyword">for</span> (ToolExecutionRequest toolExecutionRequest : aiMessage.toolExecutionRequests()) &#123;</span><br><span class="line">        sb.append(<span class="string">&quot;&#123;\nname:&quot;</span>).append(toolExecutionRequest.name())</span><br><span class="line">              .append(<span class="string">&quot;, args:【&quot;</span>).append(toolExecutionRequest.arguments()).append(<span class="string">&quot;】\n&#125;\n&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      sb.append(<span class="string">&#x27;]&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    log.info(<span class="string">&quot;\n\nAI响应: &#123;&#125;\n\n&quot;</span>, sb);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现一个自定义护栏"><a href="#实现一个自定义护栏" class="headerlink" title="实现一个自定义护栏"></a>实现一个自定义护栏</h3><p>实现敏感词拦截</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dev.langchain4j.data.message.UserMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.guardrail.InputGuardrail;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.guardrail.InputGuardrailResult;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> JD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2025/9/2 15:54</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SensitiveWordsInputGuardrails</span> <span class="keyword">implements</span> <span class="title">InputGuardrail</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Set&lt;String&gt; SENSITIVE_WORDS_KEY = Set.of(</span><br><span class="line">        <span class="string">&quot;自杀&quot;</span>, <span class="string">&quot;自尽&quot;</span>, <span class="string">&quot;杀人&quot;</span>, <span class="string">&quot;强奸&quot;</span>, <span class="string">&quot;抢劫&quot;</span>, <span class="string">&quot;盗窃&quot;</span>, <span class="string">&quot;诈骗&quot;</span>, <span class="string">&quot;赌博&quot;</span>, <span class="string">&quot;毒品&quot;</span>, <span class="string">&quot;吸毒&quot;</span></span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> InputGuardrailResult <span class="title">validate</span><span class="params">(UserMessage userMessage)</span> </span>&#123;</span><br><span class="line">    String message = userMessage.singleText().toLowerCase();</span><br><span class="line">    <span class="keyword">for</span> (String sensitiveWord : SENSITIVE_WORDS_KEY) &#123;</span><br><span class="line">      <span class="keyword">if</span> (message.contains(sensitiveWord)) &#123;</span><br><span class="line">        <span class="keyword">return</span> failure(<span class="string">&quot;包含敏感词：&quot;</span> + sensitiveWord);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> success();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义工具"><a href="#定义工具" class="headerlink" title="定义工具"></a>定义工具</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dev.langchain4j.agent.tool.P;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.agent.tool.Tool;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> JD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2025/9/2 18:03</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateTools</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Tool(name = &quot;plusDays&quot;, value = &quot;给指定时间加上指定的天数&quot;)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> LocalDateTime <span class="title">plusDays</span><span class="params">(<span class="meta">@P(&quot;时间&quot;)</span> LocalDateTime dateTime, <span class="meta">@P(&quot;加的天数&quot;)</span> <span class="keyword">int</span> days)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> dateTime.plusDays(days);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义AiService接口"><a href="#定义AiService接口" class="headerlink" title="定义AiService接口"></a>定义AiService接口</h3><h4 id="对话模式"><a href="#对话模式" class="headerlink" title="对话模式"></a>对话模式</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dev.langchain4j.service.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 报表AI服务接口</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> JD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2025/8/22 11:06</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">LlmChatService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    String REPORT_REQUEST_PROMPT_RESOURCE = <span class="string">&quot;prompt/report_request.md&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 带上下文的聊天功能</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message 用户消息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> today   今天日期</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> AI回复</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@SystemMessage(fromResource = REPORT_REQUEST_PROMPT_RESOURCE)</span></span><br><span class="line">    <span class="function">Result&lt;String&gt; <span class="title">chat</span><span class="params">(<span class="meta">@MemoryId</span> String memoryId, <span class="meta">@UserMessage</span> String message, <span class="meta">@V(&quot;today&quot;)</span> LocalDateTime today)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="流式"><a href="#流式" class="headerlink" title="流式"></a>流式</h4><p>流式的不支持结构化返回，所以Flux的泛型只能是String。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dev.langchain4j.service.MemoryId;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.SystemMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.UserMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.V;</span><br><span class="line"><span class="keyword">import</span> reactor.core.publisher.Flux;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> JD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2025/9/2 16:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">LlmStreamChatService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  String REPORT_REQUEST_PROMPT_RESOURCE = <span class="string">&quot;prompt/report_request.md&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@SystemMessage(fromResource = REPORT_REQUEST_PROMPT_RESOURCE)</span></span><br><span class="line">  <span class="function">Flux&lt;String&gt; <span class="title">chatWithStream</span><span class="params">(<span class="meta">@MemoryId</span> String memoryId, <span class="meta">@UserMessage</span> String message, <span class="meta">@V(&quot;today&quot;)</span> LocalDateTime today)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置模型和AiService"><a href="#配置模型和AiService" class="headerlink" title="配置模型和AiService"></a>配置模型和AiService</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dev.langchain4j.data.document.Document;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.document.loader.FileSystemDocumentLoader;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.document.parser.apache.tika.ApacheTikaDocumentParser;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.segment.TextSegment;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.mcp.McpToolProvider;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.mcp.client.DefaultMcpClient;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.mcp.client.McpClient;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.mcp.client.transport.McpTransport;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.mcp.client.transport.http.StreamableHttpMcpTransport;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.memory.chat.MessageWindowChatMemory;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.chat.ChatModel;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.chat.StreamingChatModel;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.openai.OpenAiChatModel;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.openai.OpenAiStreamingChatModel;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.rag.DefaultRetrievalAugmentor;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.rag.RetrievalAugmentor;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.rag.content.retriever.ContentRetriever;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.rag.query.transformer.ExpandingQueryTransformer;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.AiServices;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.store.embedding.EmbeddingStore;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.store.embedding.EmbeddingStoreIngestor;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;</span><br><span class="line"><span class="keyword">import</span> jakarta.inject.Singleton;</span><br><span class="line"><span class="keyword">import</span> lombok.SneakyThrows;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> JD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2025/8/26 14:31</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AiFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Singleton</span></span><br><span class="line">  <span class="function">LlmStreamChatService <span class="title">llmStreamChatService</span><span class="params">(DateTools dateTools)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> AiServices.builder(LlmStreamChatService.class)</span><br><span class="line">          .streamingChatModel(buildStreamingChatModel())</span><br><span class="line">          .tools(dateTools)</span><br><span class="line">          .chatMemoryProvider(memoryId -&gt; MessageWindowChatMemory.withMaxMessages(<span class="number">10</span>))</span><br><span class="line">          .inputGuardrails(<span class="keyword">new</span> SensitiveWordsInputGuardrails())  <span class="comment">// 输入拦截器</span></span><br><span class="line">          .build();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Singleton</span></span><br><span class="line">  <span class="meta">@SneakyThrows</span></span><br><span class="line">  <span class="function">LlmChatService <span class="title">llmChatService</span><span class="params">(DateTools dateTools)</span> </span>&#123;</span><br><span class="line">    ChatModel chatModel = buildChatModel();</span><br><span class="line">    <span class="keyword">return</span> AiServices.builder(LlmChatService.class)</span><br><span class="line">          .chatModel(chatModel)</span><br><span class="line"><span class="comment">//          .systemMessageProvider(obj -&gt; systemPrompt.toString())</span></span><br><span class="line">          .tools(dateTools)</span><br><span class="line"><span class="comment">//          .toolProvider(buildMcpToolProvider())  // MCP 工具</span></span><br><span class="line">          .chatMemoryProvider(memoryId -&gt; MessageWindowChatMemory.withMaxMessages(<span class="number">10</span>))    <span class="comment">// 内存聊天存储，memoryId标识一个session</span></span><br><span class="line"><span class="comment">//          .contentRetriever(buildContentRetriever())</span></span><br><span class="line">          .retrievalAugmentor(buildRetrievalAugmentor(chatModel))</span><br><span class="line">          .inputGuardrails(<span class="keyword">new</span> SensitiveWordsInputGuardrails())  <span class="comment">// 输入拦截器</span></span><br><span class="line">          .build();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> RetrievalAugmentor <span class="title">buildRetrievalAugmentor</span><span class="params">(ChatModel chatModel)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> DefaultRetrievalAugmentor.builder()</span><br><span class="line">          .queryTransformer(ExpandingQueryTransformer.builder().chatModel(chatModel).build())  <span class="comment">// 扩展查询</span></span><br><span class="line">          .contentRetriever(buildContentRetriever())</span><br><span class="line">          .build();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RAG：从内存 embeddingStore 中检索匹配的文本片段</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> ContentRetriever <span class="title">buildContentRetriever</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Document&gt; documents = FileSystemDocumentLoader.loadDocuments(<span class="keyword">this</span>.getClass().getClassLoader().getResource(<span class="string">&quot;aidocs&quot;</span>).getPath(), <span class="keyword">new</span> ApacheTikaDocumentParser());</span><br><span class="line"></span><br><span class="line">    EmbeddingStore&lt;TextSegment&gt; embeddingStore = <span class="keyword">new</span> InMemoryEmbeddingStore&lt;&gt;();</span><br><span class="line">    EmbeddingStoreIngestor.ingest(documents, embeddingStore);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> EmbeddingStoreContentRetriever.from(embeddingStore);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * MCP 工具提供者</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> McpToolProvider <span class="title">buildMcpToolProvider</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 如果是通过 npx 或 uvx 本地启动 MCP 服务，需要先安装对应的工具，并且利用下面的配置建立通讯：</span></span><br><span class="line"><span class="comment">//    McpTransport transport = new StdioMcpTransport.Builder()</span></span><br><span class="line"><span class="comment">//          .command(List.of(&quot;/usr/bin/npm&quot;, &quot;exec&quot;, &quot;@modelcontextprotocol/server-everything@0.6.2&quot;))</span></span><br><span class="line"><span class="comment">//          .logEvents(true) // only if you want to see the traffic in the log</span></span><br><span class="line"><span class="comment">//          .build();</span></span><br><span class="line">    <span class="comment">// 和 MCP 服务通讯</span></span><br><span class="line">    McpTransport transport = <span class="keyword">new</span> StreamableHttpMcpTransport.Builder()</span><br><span class="line"><span class="comment">//          .url(&quot;https://open.bigmodel.cn/api/mcp/web_search/sse?Authorization=&quot; + apiKey)</span></span><br><span class="line">          .logRequests(<span class="keyword">true</span>) <span class="comment">// 开启日志，查看更多信息</span></span><br><span class="line">          .logResponses(<span class="keyword">true</span>)</span><br><span class="line">          .build();</span><br><span class="line">    <span class="comment">// 创建 MCP 客户端</span></span><br><span class="line">    McpClient mcpClient = <span class="keyword">new</span> DefaultMcpClient.Builder()</span><br><span class="line">          .key(<span class="string">&quot;yupiMcpClient&quot;</span>)</span><br><span class="line">          .transport(transport)</span><br><span class="line">          .build();</span><br><span class="line">    <span class="comment">// 从 MCP 客户端获取工具</span></span><br><span class="line">    <span class="keyword">return</span> McpToolProvider.builder()</span><br><span class="line">          .mcpClients(mcpClient)</span><br><span class="line">          .build();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 构建流式ChatModel</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> StreamingChatModel <span class="title">buildStreamingChatModel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> OpenAiStreamingChatModel.builder()</span><br><span class="line">          .apiKey(SysEnvUtils.getSysOrEnv(<span class="string">&quot;behavior.llm.apiKey&quot;</span>))</span><br><span class="line">          .baseUrl(SysEnvUtils.getSysOrEnv(<span class="string">&quot;behavior.llm.baseUrl&quot;</span>))</span><br><span class="line">          .modelName(SysEnvUtils.getSysOrEnv(<span class="string">&quot;behavior.llm.modelName&quot;</span>))</span><br><span class="line">          .frequencyPenalty(<span class="number">1.5</span>)</span><br><span class="line">          .listeners(List.of(<span class="keyword">new</span> DefaultChatModelListener()))   <span class="comment">// 自定义模型监听器</span></span><br><span class="line">          .maxTokens(<span class="number">8192</span>)</span><br><span class="line">          .strictJsonSchema(<span class="keyword">true</span>)   <span class="comment">// 指定严格json</span></span><br><span class="line">          .responseFormat(<span class="string">&quot;json_object&quot;</span>)   <span class="comment">// 指定响应格式为json</span></span><br><span class="line">          .build();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> ChatModel <span class="title">buildChatModel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> OpenAiChatModel.builder()</span><br><span class="line">          .apiKey(SysEnvUtils.getSysOrEnv(<span class="string">&quot;behavior.llm.apiKey&quot;</span>))</span><br><span class="line">          .baseUrl(SysEnvUtils.getSysOrEnv(<span class="string">&quot;behavior.llm.baseUrl&quot;</span>))</span><br><span class="line">          .modelName(SysEnvUtils.getSysOrEnv(<span class="string">&quot;behavior.llm.modelName&quot;</span>))</span><br><span class="line"><span class="comment">//          .logRequests(true)</span></span><br><span class="line"><span class="comment">//          .logResponses(true)</span></span><br><span class="line">          .frequencyPenalty(<span class="number">1.5</span>)</span><br><span class="line">          .listeners(List.of(<span class="keyword">new</span> DefaultChatModelListener()))   <span class="comment">// 自定义模型监听器</span></span><br><span class="line">          .strictJsonSchema(<span class="keyword">true</span>)</span><br><span class="line">          .responseFormat(<span class="string">&quot;json_object&quot;</span>)</span><br><span class="line"><span class="comment">//          .returnThinking(true)</span></span><br><span class="line">          .build();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/posts/54/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">华为Dws 运维手册</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">JD</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BE%9D%E8%B5%96"><span class="nav-text">一、依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AEAI"><span class="nav-text">二、配置AI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E5%90%AC"><span class="nav-text">实现一个自定义监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8A%A4%E6%A0%8F"><span class="nav-text">实现一个自定义护栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B7%A5%E5%85%B7"><span class="nav-text">定义工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89AiService%E6%8E%A5%E5%8F%A3"><span class="nav-text">定义AiService接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%AF%9D%E6%A8%A1%E5%BC%8F"><span class="nav-text">对话模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E5%BC%8F"><span class="nav-text">流式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9E%8B%E5%92%8CAiService"><span class="nav-text">配置模型和AiService</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
