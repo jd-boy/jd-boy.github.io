@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="JD">
+    
+    <title>
+        
+            由优化 FIN_WAIT_2 状态超时引入的关于 tcp_fin_timeout 参数研究 |
+        
+        Bean You
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"jzcupid.cn","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/favicon.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"莫听穿林打叶声，何妨吟啸且徐行。"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"trigger":"auto","preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Bean You
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">由优化 FIN_WAIT_2 状态超时引入的关于 tcp_fin_timeout 参数研究</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">JD</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2025-11-13 09:45:00
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/Linux/">Linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>原文地址：<a class="link"   target="_blank" rel="noopener" href="https://blog.51cto.com/u_15127582/2750313" >https://blog.51cto.com/u_15127582/2750313<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在很多实际应用环境中，我们经常会遇到系统中存在大量的 FIN_WAIT_2 状态的连接，由于不能及时释放， 造成本端不能提供有效端口资源，影响对端建立新连接的情况。</p>
+<p>对于上述情况，引起的可能原因有：</p>
+<ol>
+<li> 比如：服务端主动关闭连接，但客户端没有关闭连接</li>
+<li> 比如：有一些客户端在处理持久连接 (aka keepalives) 时存在问题，当连接空闲下来服务器关闭连接时 ( 基于 KeepAlive Timeout 指令 ) ， 客户端的程序没有主动发送 FIN 和 ACK 到服务器，这样就意味着这个连接将停留在 FIN_WAIT_2 状态</li>
+</ol>
+<p>诸如此类的原因，经常会导致系统中 FIN_WAIT_2 连接过多。</p>
+<h2 id="FIN-WAIT-2-如何产生"><a href="#FIN-WAIT-2-如何产生" class="headerlink" title="FIN_WAIT_2 如何产生"></a>FIN_WAIT_2 如何产生</h2><p>根据 TCP 四次握手协议，正常情况下在主动关闭端发送了 FIN 之后，进入 FIN_WAIT_1 状态，在此状态下收到对端的 ACK ，则进入 FIN_WAIT_2 状态，而 FIN_WAIT_2 后续要做的工作是等待接收对端发过来的 FIN 包，并且发送 ACK ，进而进入到 TIME_WAIT 状态，并最终进入释放连接处理流程，如下为客户端主动发起关闭连接的状态变化图：</p>
+<p><img src="data:image/webp;base64,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"></p>
+<p>异常情况下，如果被动关闭端处于 CLOSE-WAIT 状态后，没有及时返回 FIN ACK 至主动关闭端，导致主动关闭端一直处于 FIN_WAIT2 状态： </p>
+<p><img src="data:image/webp;base64,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"></p>
+<p>这是比较典型的导致主动关闭端处于 FIN_WAIT2 状态的场景，在系统里，一旦此状态的连接不断增多，就会导致出现文章开头提到的连接建连异常。</p>
+<p>本文主要关注 FIN_WAIT_2 状态连接的处理，并结合 Linux 系统中 tcp_fin_timeout 参数，探索相应的解决方案。</p>
+<h2 id="场景再现"><a href="#场景再现" class="headerlink" title="场景再现"></a>场景再现</h2><h3 id="测试场景："><a href="#测试场景：" class="headerlink" title="测试场景："></a>测试场景：</h3><p>在测试环境中，我们在客户端和服务端建立连接后，以 Server 端主动断开连接， Client 端保持一定时间后再释放连接的方式来模拟 FIN_WAIT_2 状态的产生。</p>
+<p>同时，我们也通过对 Linux 上 TCP 内核参数的了解，有一个参数可以控制系统上 FIN_WAIT_2 状态连接的超时时间，以使 FIN_WAIT_2 状态连接按要求超时，并进入释放流程。</p>
+<h3 id="实际测试："><a href="#实际测试：" class="headerlink" title="实际测试："></a>实际测试：</h3><p>由于在实际应用环境中，我们经常会遇到系统中存在大量的 FIN_WAIT_2 状态连接的情况，为快速释放该状态的连接，我们手工把 tcp_fin_timeout 参数调整为 5 （ tcp_fin_timeout=5 ），期待结果应该是处于 FIN_WAIT2 状态的连接，最多保持 5 秒就应该转入 TIME_WAIT 状态 , 测试过程及输出如下：</p>
+<h3 id="未达预期原因"><a href="#未达预期原因" class="headerlink" title="未达预期原因"></a>未达预期原因</h3><p>针对上述测试，我们存在两个疑问：</p>
+<p>1 、 net.ipv4.tcp_fin_timeout 参数为什么不生效？</p>
+<p>2 、该参数只是在 SUSE Linux 11 SP4 系统上不生效吗？</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>通过上面的测试以及对操作系统源代码的分析，我们初步可以得到如下结论：不同的 kernel 版本中， tcp_fin_timeout 的实现机制不完全一样。</p>
+<h3 id="一、在-SUSE11-kernel-版本-3-0-101-108-77-中，实际的-FIN-WAIT-2-状态连接超时时间根据-net-ipv4-tcp-fin-timeout-设置的值不同而分为三种情况："><a href="#一、在-SUSE11-kernel-版本-3-0-101-108-77-中，实际的-FIN-WAIT-2-状态连接超时时间根据-net-ipv4-tcp-fin-timeout-设置的值不同而分为三种情况：" class="headerlink" title="一、在 SUSE11(kernel 版本 3.0.101-108.77) 中，实际的 FIN_WAIT_2 状态连接超时时间根据 net.ipv4.tcp_fin_timeout 设置的值不同而分为三种情况："></a>一、在 SUSE11(kernel 版本 3.0.101-108.77) 中，实际的 FIN_WAIT_2 状态连接超时时间根据 net.ipv4.tcp_fin_timeout 设置的值不同而分为三种情况：</h3><h4 id="1）tcp-fin-timeout-lt-3-FIN-WAIT-2-状态超时时间为-tcp-fin-timeout-值。"><a href="#1）tcp-fin-timeout-lt-3-FIN-WAIT-2-状态超时时间为-tcp-fin-timeout-值。" class="headerlink" title="1）tcp_fin_timeout &lt;= 3, FIN_WAIT_2 状态超时时间为 tcp_fin_timeout 值。"></a>1）tcp_fin_timeout &lt;= 3, FIN_WAIT_2 状态超时时间为 tcp_fin_timeout 值。</h4><p>下图以 server 端 tcp_fin_timeout=3 为例（调整一下 client 段代码，循环执行 time.sleep(10) ，即既不 close ，也不退出程序，纯粹测 tcp_fin_timeout 的超时表现 ）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@linux:/root#while true;do netstat -ano|grep &quot; 192.168.2&quot;;sleep 1;donetcp        0      0 192.168.2.252:6667     192.168.1.4:60184        ESTABLISHED off (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60184        FIN_WAIT2   timewait (2.76/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60184        FIN_WAIT2   timewait (1.76/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60184       FIN_WAIT2   timewait (0.74/0/0)</span><br></pre></td></tr></table></figure>
+
+<p>其伪代码逻辑如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">define INET_TWDR_RECYCLE_TICK (8 + 2 - INET_TWDR_RECYCLE_SLOTS_LOG) // 8+2-5 == 5</span><br></pre></td></tr></table></figure>
+
+<p>slot = (timeo + (1 &lt;&lt; INET_TWDR_RECYCLE_TICK) - 1) &gt;&gt; INET_TWDR_RECYCLE_TICK; // (timeo +31)/32 以上取整 [timeo/32]</p>
+<p>连续两个 sock 进入 FIN_WAIT2 状态，并且前一个 socket 在 FIN_WAIT2 未超时的情况下，会以前面的 socket 的 timer 的超时中处理 twcal_cow 队列。</p>
+<p>连续两个 sock 进入 FIN_WAIT2 状态，并且前一个 socket 在 FIN_WAIT2 未超时的情况下，会以前面的 socket 的 timer 的超时中处理 twcal_cow 队列。</p>
+<h4 id="2）3-lt-tcp-fin-timeout-lt-60-FIN-WAIT-2状态超时时间为-tcp-fin-timeout值-定时器精度（以7秒为单位）误差时间。"><a href="#2）3-lt-tcp-fin-timeout-lt-60-FIN-WAIT-2状态超时时间为-tcp-fin-timeout值-定时器精度（以7秒为单位）误差时间。" class="headerlink" title="2）3&lt;tcp_fin_timeout &lt;=60, FIN_WAIT_2状态超时时间为 tcp_fin_timeout值+定时器精度（以7秒为单位）误差时间。"></a>2）3&lt;tcp_fin_timeout &lt;=60, FIN_WAIT_2状态超时时间为 tcp_fin_timeout值+定时器精度（以7秒为单位）误差时间。</h4><p>下图以server端 tcp_fin_timeout=7为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        ESTABLISHED off (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (6.59/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (5.58/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (4.57/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (3.56/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (2.55/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (1.54/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.52/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60404        FIN_WAIT2   timewait (0.00/0/0)</span><br></pre></td></tr></table></figure>
+
+<p>1.<br>其伪代码逻辑如下：</p>
+<p>slot = (timeo + (1&lt;&lt;INET_TWDR_RECYCLE_TICK)-1) &gt;&gt;INET_TWDR_RECYCLE_TICK; //取[timeo/32]</p>
+<p>if slot &gt;= 32 &amp;&amp; timeo &lt;= 60*HZ</p>
+<p>twdr-&gt;cells[8]有8个队列，每twdr-&gt;period周期（即7秒）取一个队列的socket进行处理</p>
+<ol start="3">
+<li>tcp_fin_timeout &gt; 60, FIN_WAIT_2状态会先经历keepalive状态，持续时间为tmo=tcp_fin_timeout-60值, 再经历timewait状态，持续时间为 (tcp_fin_timeout -60)+定时器精度，这里的定时器精度根据(tcp_fin_timeout -60)的计算值，会最终落在上述两个精度范围（1/8秒为单位或7秒为单位）。</li>
+</ol>
+<p>下图以 server 端 tcp_fin_timeout=65 为例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        ESTABLISHED off (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   keepalive (4.86/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   keepalive (3.85/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   keepalive (2.83/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   keepalive (1.82/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   keepalive (0.81/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (4.80/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (3.78/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (2.78/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (1.77/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.76/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)tcp        0      0 192.168.2.252:6667     192.168.1.4:60434        FIN_WAIT2   timewait (0.00/0/0)</span><br></pre></td></tr></table></figure>
+
+<p>其伪代码逻辑如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_timer(sk-&gt;sk_timer,jiffies+(timeo-60))tcp_keeplive_timer--&gt;tcp_time_wait(sk, TCP_FIN_WAIT2, (timeo -60))</span><br></pre></td></tr></table></figure>
+
+<p>因此 FIN_WAIT_2 状态连接超时周期也会随着 net.ipv4.tcp_fin_timeout 参数设置的不同发生变化，从而对操作系统上处于 FIN_WAIT_2 状态的连接超时产生不同的超时作用。</p>
+<h3 id="二、在-SUSE12-SP3-kernel-版本-4-4-156-94-64-中，实际的-FIN-WAIT-2-状态连接超时时间根据-net-ipv4-tcp-fin-timeout-设置的值不同而分为两种情况："><a href="#二、在-SUSE12-SP3-kernel-版本-4-4-156-94-64-中，实际的-FIN-WAIT-2-状态连接超时时间根据-net-ipv4-tcp-fin-timeout-设置的值不同而分为两种情况：" class="headerlink" title="二、在 SUSE12 SP3(kernel 版本 4.4.156-94.64) 中，实际的 FIN_WAIT_2 状态连接超时时间根据 net.ipv4.tcp_fin_timeout 设置的值不同而分为两种情况："></a>二、在 SUSE12 SP3(kernel 版本 4.4.156-94.64) 中，实际的 FIN_WAIT_2 状态连接超时时间根据 net.ipv4.tcp_fin_timeout 设置的值不同而分为两种情况：</h3><h4 id="1）tcp-fin-timeout-lt-60-FIN-WAIT-2-状态超时时间为-tcp-fin-timeout-值。下图为-server-端-tcp-fin-timeout-3-示例："><a href="#1）tcp-fin-timeout-lt-60-FIN-WAIT-2-状态超时时间为-tcp-fin-timeout-值。下图为-server-端-tcp-fin-timeout-3-示例：" class="headerlink" title="1）tcp_fin_timeout &lt;=60, FIN_WAIT_2 状态超时时间为 tcp_fin_timeout 值。下图为 server 端 tcp_fin_timeout=3 示例："></a>1）tcp_fin_timeout &lt;=60, FIN_WAIT_2 状态超时时间为 tcp_fin_timeout 值。下图为 server 端 tcp_fin_timeout=3 示例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@linux:/root#while true;do netstat -ano|grep &quot; 192.168.1&quot;;sleep 1;donetcp        0      0 192.168.1.4:6667         192.168.2.252:55180    ESTABLISHED off (0.00/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:55180    FIN_WAIT2   timewait (2.16/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:55180    FIN_WAIT2   timewait (1.14/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:55180    FIN_WAIT2   timewait (0.13/0/0)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2）tcp-fin-timeout-gt-60-FIN-WAIT-2-状态会先经历-keepalive-状态，持续时间为-tmo-tcp-fin-timeout-60-值-再经历-timewait-状态，持续时间同样为-tmo-tcp-fin-timeout-60-值。"><a href="#2）tcp-fin-timeout-gt-60-FIN-WAIT-2-状态会先经历-keepalive-状态，持续时间为-tmo-tcp-fin-timeout-60-值-再经历-timewait-状态，持续时间同样为-tmo-tcp-fin-timeout-60-值。" class="headerlink" title="2）tcp_fin_timeout &gt; 60, FIN_WAIT_2 状态会先经历 keepalive 状态，持续时间为 tmo=tcp_fin_timeout-60 值 , 再经历 timewait 状态，持续时间同样为 tmo= tcp_fin_timeout-60 值。"></a>2）tcp_fin_timeout &gt; 60, FIN_WAIT_2 状态会先经历 keepalive 状态，持续时间为 tmo=tcp_fin_timeout-60 值 , 再经历 timewait 状态，持续时间同样为 tmo= tcp_fin_timeout-60 值。</h4><p>下图为 server 端 tcp_fin_timeout=65 示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@linux:/root#while true;do netstat -ano|grep &quot; 192.168.1&quot;;sleep 1;donetcp        0      0 192.168.1.4:6667         192.168.2.252:32939    ESTABLISHED off (0.00/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   keepalive (4.77/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   keepalive (3.76/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   keepalive (2.74/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   keepalive (1.73/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   keepalive (0.71/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   timewait (4.70/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   timewait (3.68/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   timewait (2.67/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.252:32939    FIN_WAIT2   timewait (1.65/0/0)tcp        0      0 192.168.1.4:6667         192.168.2.2</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/posts/43477/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Jackson 自定义序列化</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2025&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">JD</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FIN-WAIT-2-%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F"><span class="nav-text">FIN_WAIT_2 如何产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%86%8D%E7%8E%B0"><span class="nav-text">场景再现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="nav-text">测试场景：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%B5%8B%E8%AF%95%EF%BC%9A"><span class="nav-text">实际测试：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AA%E8%BE%BE%E9%A2%84%E6%9C%9F%E5%8E%9F%E5%9B%A0"><span class="nav-text">未达预期原因</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9C%A8-SUSE11-kernel-%E7%89%88%E6%9C%AC-3-0-101-108-77-%E4%B8%AD%EF%BC%8C%E5%AE%9E%E9%99%85%E7%9A%84-FIN-WAIT-2-%E7%8A%B6%E6%80%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E6%A0%B9%E6%8D%AE-net-ipv4-tcp-fin-timeout-%E8%AE%BE%E7%BD%AE%E7%9A%84%E5%80%BC%E4%B8%8D%E5%90%8C%E8%80%8C%E5%88%86%E4%B8%BA%E4%B8%89%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-text">一、在 SUSE11(kernel 版本 3.0.101-108.77) 中，实际的 FIN_WAIT_2 状态连接超时时间根据 net.ipv4.tcp_fin_timeout 设置的值不同而分为三种情况：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%EF%BC%89tcp-fin-timeout-lt-3-FIN-WAIT-2-%E7%8A%B6%E6%80%81%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E4%B8%BA-tcp-fin-timeout-%E5%80%BC%E3%80%82"><span class="nav-text">1）tcp_fin_timeout &lt;&#x3D; 3, FIN_WAIT_2 状态超时时间为 tcp_fin_timeout 值。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%EF%BC%893-lt-tcp-fin-timeout-lt-60-FIN-WAIT-2%E7%8A%B6%E6%80%81%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E4%B8%BA-tcp-fin-timeout%E5%80%BC-%E5%AE%9A%E6%97%B6%E5%99%A8%E7%B2%BE%E5%BA%A6%EF%BC%88%E4%BB%A57%E7%A7%92%E4%B8%BA%E5%8D%95%E4%BD%8D%EF%BC%89%E8%AF%AF%E5%B7%AE%E6%97%B6%E9%97%B4%E3%80%82"><span class="nav-text">2）3&lt;tcp_fin_timeout &lt;&#x3D;60, FIN_WAIT_2状态超时时间为 tcp_fin_timeout值+定时器精度（以7秒为单位）误差时间。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9C%A8-SUSE12-SP3-kernel-%E7%89%88%E6%9C%AC-4-4-156-94-64-%E4%B8%AD%EF%BC%8C%E5%AE%9E%E9%99%85%E7%9A%84-FIN-WAIT-2-%E7%8A%B6%E6%80%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E6%A0%B9%E6%8D%AE-net-ipv4-tcp-fin-timeout-%E8%AE%BE%E7%BD%AE%E7%9A%84%E5%80%BC%E4%B8%8D%E5%90%8C%E8%80%8C%E5%88%86%E4%B8%BA%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-text">二、在 SUSE12 SP3(kernel 版本 4.4.156-94.64) 中，实际的 FIN_WAIT_2 状态连接超时时间根据 net.ipv4.tcp_fin_timeout 设置的值不同而分为两种情况：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%EF%BC%89tcp-fin-timeout-lt-60-FIN-WAIT-2-%E7%8A%B6%E6%80%81%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E4%B8%BA-tcp-fin-timeout-%E5%80%BC%E3%80%82%E4%B8%8B%E5%9B%BE%E4%B8%BA-server-%E7%AB%AF-tcp-fin-timeout-3-%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-text">1）tcp_fin_timeout &lt;&#x3D;60, FIN_WAIT_2 状态超时时间为 tcp_fin_timeout 值。下图为 server 端 tcp_fin_timeout&#x3D;3 示例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%EF%BC%89tcp-fin-timeout-gt-60-FIN-WAIT-2-%E7%8A%B6%E6%80%81%E4%BC%9A%E5%85%88%E7%BB%8F%E5%8E%86-keepalive-%E7%8A%B6%E6%80%81%EF%BC%8C%E6%8C%81%E7%BB%AD%E6%97%B6%E9%97%B4%E4%B8%BA-tmo-tcp-fin-timeout-60-%E5%80%BC-%E5%86%8D%E7%BB%8F%E5%8E%86-timewait-%E7%8A%B6%E6%80%81%EF%BC%8C%E6%8C%81%E7%BB%AD%E6%97%B6%E9%97%B4%E5%90%8C%E6%A0%B7%E4%B8%BA-tmo-tcp-fin-timeout-60-%E5%80%BC%E3%80%82"><span class="nav-text">2）tcp_fin_timeout &gt; 60, FIN_WAIT_2 状态会先经历 keepalive 状态，持续时间为 tmo&#x3D;tcp_fin_timeout-60 值 , 再经历 timewait 状态，持续时间同样为 tmo&#x3D; tcp_fin_timeout-60 值。</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
