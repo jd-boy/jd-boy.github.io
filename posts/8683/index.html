@@ -205,6 +205,13 @@
 
         <div class="article-content markdown-body">
             <p>官方文档：<a class="link"   target="_blank" rel="noopener" href="https://milvus.io/docs/zh/install_standalone-docker.md" >https://milvus.io/docs/zh/install_standalone-docker.md<i class="fas fa-external-link-alt"></i></a></p>
+<h4 id="运行安装脚本后"><a href="#运行安装脚本后" class="headerlink" title="运行安装脚本后"></a>运行安装脚本后</h4><ul>
+<li>一个名为 Milvus 的 docker 容器已在19530 端口启动。</li>
+<li>嵌入式 etcd 与 Milvus 安装在同一个容器中，服务端口为2379。它的配置文件被映射到当前文件夹中的embedEtcd.yaml。</li>
+<li>要更改 Milvus 的默认配置，请将您的设置添加到当前文件夹中的user.yaml文件，然后重新启动服务。</li>
+<li>Milvus 数据卷被映射到当前文件夹中的volumes/milvus。</li>
+<li>你可以访问 Milvus WebUI，网址是 <code>http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。有关详细信息，请参阅Milvus WebUI。</li>
+</ul>
 
         </div>
 
@@ -361,7 +368,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%90%8E"><span class="nav-text">运行安装脚本后</span></a></li></ol>
     </div>
 </div>
         </aside>
