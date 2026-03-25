@@ -247,6 +247,13 @@
 </tr>
 </tbody></table>
 <h3 id="Skills"><a href="#Skills" class="headerlink" title="Skills"></a>Skills</h3><p> <strong>Superpowers</strong><br>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/obra/superpowers" >https://github.com/obra/superpowers<i class="fas fa-external-link-alt"></i></a><br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/plugin marketplace add obra/superpowers-marketplace</span><br><span class="line">/plugin install superpowers@superpowers-marketplace</span><br></pre></td></tr></table></figure></p>
+<p><strong>tavily-mcp</strong><br>访问网页<br>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/tavily-ai/tavily-mcp" >https://github.com/tavily-ai/tavily-mcp<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude mcp add --transport http --scope user tavily https://mcp.tavily.com/mcp/?tavilyApiKey=&lt;your-api-key&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>chrome-devtools</strong><br>自动访问chrome浏览器并测试<br>文档：<a class="link"   target="_blank" rel="noopener" href="https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session?hl=zh-cn" >https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session?hl=zh-cn<i class="fas fa-external-link-alt"></i></a></p>
+<p>1.浏览器开启远程调试<br>chrome://inspect#remote-debugging</p>
+<p>2.配置mcp</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;chrome-devtools&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;command&quot;</span>: <span class="string">&quot;npx&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;args&quot;</span>: [<span class="string">&quot;-y&quot;</span>, <span class="string">&quot;chrome-devtools-mcp@latest&quot;</span>, <span class="string">&quot;--autoConnect&quot;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
