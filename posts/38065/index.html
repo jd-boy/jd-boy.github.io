@@ -9,7 +9,7 @@
     
     <title>
         
-            Claude Code |
+            Docker使用技巧 |
         
         Bean You
     </title>
@@ -150,7 +150,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Claude Code</span>
+            <span class="title-hover-animation">Docker使用技巧</span>
         </div>
 
         
@@ -168,7 +168,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2026-03-20 15:59:00
+        <i class="fas fa-edit"></i>&nbsp;2026-03-25 16:36:00
     </span>
     
         <span class="article-categories article-meta-item">
@@ -176,11 +176,11 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/AI/">AI</a>&nbsp;
+                        <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/AI/AI%E5%B7%A5%E5%85%B7/">AI工具</a>&nbsp;
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/Docker/">Docker</a>&nbsp;
                     </li>
                 
             </ul>
@@ -204,56 +204,8 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h3><p><strong>跳过权限确认</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude --dangerously-skip-permissions</span><br></pre></td></tr></table></figure>
+            <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="清理构建缓存"><a href="#清理构建缓存" class="headerlink" title="清理构建缓存"></a>清理构建缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker buildx prune -f</span><br></pre></td></tr></table></figure>
 
-<h3 id="Think模式"><a href="#Think模式" class="headerlink" title="Think模式"></a>Think模式</h3><table>
-<thead>
-<tr>
-<th align="left">模式</th>
-<th align="left">思考深度</th>
-<th align="left">Token消耗</th>
-<th align="left">适用场景</th>
-<th align="left">响应时间</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>think</code></td>
-<td align="left">基础</td>
-<td align="left">低</td>
-<td align="left">简单问题、快速回答</td>
-<td align="left">2-5秒</td>
-</tr>
-<tr>
-<td align="left"><code>think hard</code></td>
-<td align="left">深度</td>
-<td align="left">中</td>
-<td align="left">复杂逻辑、算法设计</td>
-<td align="left">5-15秒</td>
-</tr>
-<tr>
-<td align="left"><code>think harder</code></td>
-<td align="left">更深度</td>
-<td align="left">高</td>
-<td align="left">架构设计、难题分析</td>
-<td align="left">15-30秒</td>
-</tr>
-<tr>
-<td align="left"><code>ultrathink</code></td>
-<td align="left">极深度</td>
-<td align="left">极高</td>
-<td align="left">最复杂问题、创新方案</td>
-<td align="left">30-60秒</td>
-</tr>
-</tbody></table>
-<h3 id="Skills"><a href="#Skills" class="headerlink" title="Skills"></a>Skills</h3><p> <strong>Superpowers</strong><br>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/obra/superpowers" >https://github.com/obra/superpowers<i class="fas fa-external-link-alt"></i></a><br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/plugin marketplace add obra/superpowers-marketplace</span><br><span class="line">/plugin install superpowers@superpowers-marketplace</span><br></pre></td></tr></table></figure></p>
-<p><strong>tavily-mcp</strong><br>访问网页<br>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/tavily-ai/tavily-mcp" >https://github.com/tavily-ai/tavily-mcp<i class="fas fa-external-link-alt"></i></a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude mcp add --transport http --scope user tavily https://mcp.tavily.com/mcp/?tavilyApiKey=&lt;your-api-key&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>chrome-devtools</strong><br>自动访问chrome浏览器并测试<br>文档：<a class="link"   target="_blank" rel="noopener" href="https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session?hl=zh-cn" >https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session?hl=zh-cn<i class="fas fa-external-link-alt"></i></a></p>
-<p>1.浏览器开启远程调试<br>chrome://inspect#remote-debugging</p>
-<p>2.配置mcp</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;chrome-devtools&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;command&quot;</span>: <span class="string">&quot;npx&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;args&quot;</span>: [<span class="string">&quot;-y&quot;</span>, <span class="string">&quot;chrome-devtools-mcp@latest&quot;</span>, <span class="string">&quot;--autoConnect&quot;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -262,29 +214,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/posts/38065/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Docker使用技巧</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/posts/28078/"
+                           href="/posts/2969/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">OpenSpec</span>
+                                <span class="post-nav-title-item">Claude Code</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -410,7 +347,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">启动命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Think%E6%A8%A1%E5%BC%8F"><span class="nav-text">Think模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Skills"><span class="nav-text">Skills</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E7%90%86%E6%9E%84%E5%BB%BA%E7%BC%93%E5%AD%98"><span class="nav-text">清理构建缓存</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
