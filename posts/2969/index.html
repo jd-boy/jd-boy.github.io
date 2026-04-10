@@ -246,6 +246,17 @@
 <td align="left">30-60秒</td>
 </tr>
 </tbody></table>
+<h3 id="登录或启动403"><a href="#登录或启动403" class="headerlink" title="登录或启动403"></a>登录或启动403</h3><p>Anthropic 屏蔽了来自中国 IP 的 API 访问。这影响所有环节 - OAuth 登录、API 调用、CLI 和 VS Code 扩展。即使你有付费的 Claude Max 订阅，从中国 IP 发出的请求一律 403。</p>
+<p><strong>快速测试：</strong></p>
+<p>curl -I <a class="link"   target="_blank" rel="noopener" href="https://api.anthropic.com/" >https://api.anthropic.com<i class="fas fa-external-link-alt"></i></a><br>如果返回 HTTP/2 403 - 说明被屏蔽了。如果超时 - 可能是 DNS 或防火墙问题。</p>
+<p><strong>验证代理是否可用：</strong></p>
+<p>curl -I –proxy <a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1:7890/" >http://127.0.0.1:7890<i class="fas fa-external-link-alt"></i></a> <a class="link"   target="_blank" rel="noopener" href="https://api.anthropic.com/" >https://api.anthropic.com<i class="fas fa-external-link-alt"></i></a><br>看到 HTTP/1.1 200 Connection established 后面跟一个非 403 的响应就对了（404 也行 - 说明请求到达了 Anthropic 的服务器）。</p>
+<p><strong>设置 HTTPS_PROXY 环境变量</strong><br>macOS (zsh):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export HTTPS_PROXY=&quot;http://127.0.0.1:7890&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>Linux (bash):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export HTTPS_PROXY=&quot;http://127.0.0.1:7890&quot;&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
 <h3 id="查看-token-使用量"><a href="#查看-token-使用量" class="headerlink" title="查看 token 使用量"></a>查看 token 使用量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx ccusage monthly</span><br></pre></td></tr></table></figure>
 
 <h3 id="Skills"><a href="#Skills" class="headerlink" title="Skills"></a>Skills</h3><p> <strong>Superpowers</strong><br>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/obra/superpowers" >https://github.com/obra/superpowers<i class="fas fa-external-link-alt"></i></a><br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/plugin marketplace add obra/superpowers-marketplace</span><br><span class="line">/plugin install superpowers@superpowers-marketplace</span><br></pre></td></tr></table></figure></p>
@@ -412,7 +423,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">启动命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Think%E6%A8%A1%E5%BC%8F"><span class="nav-text">Think模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-token-%E4%BD%BF%E7%94%A8%E9%87%8F"><span class="nav-text">查看 token 使用量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Skills"><span class="nav-text">Skills</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">启动命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Think%E6%A8%A1%E5%BC%8F"><span class="nav-text">Think模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E6%88%96%E5%90%AF%E5%8A%A8403"><span class="nav-text">登录或启动403</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-token-%E4%BD%BF%E7%94%A8%E9%87%8F"><span class="nav-text">查看 token 使用量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Skills"><span class="nav-text">Skills</span></a></li></ol>
     </div>
 </div>
         </aside>
