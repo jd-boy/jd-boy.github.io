@@ -9,7 +9,7 @@
     
     <title>
         
-            Docker使用手册 |
+            Git 常用命令 |
         
         Bean You
     </title>
@@ -150,7 +150,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Docker使用手册</span>
+            <span class="title-hover-animation">Git 常用命令</span>
         </div>
 
         
@@ -168,7 +168,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2026-03-25 16:36:00
+        <i class="fas fa-edit"></i>&nbsp;2026-04-14 15:52:00
     </span>
     
         <span class="article-categories article-meta-item">
@@ -176,11 +176,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/Docker/">Docker</a>&nbsp;
+                        <a href="/categories/%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">开发实用技巧</a>&nbsp;
                     </li>
                 
             </ul>
@@ -204,8 +200,14 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="清理构建缓存"><a href="#清理构建缓存" class="headerlink" title="清理构建缓存"></a>清理构建缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker buildx prune -f</span><br></pre></td></tr></table></figure>
+            <h2 id="Submodule"><a href="#Submodule" class="headerlink" title="Submodule"></a>Submodule</h2><h3 id="切换所有模块分支"><a href="#切换所有模块分支" class="headerlink" title="切换所有模块分支"></a>切换所有模块分支</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule foreach git checkout -b &lt;branch&gt;</span><br></pre></td></tr></table></figure>
 
+<h3 id="子模块都能自动跟随主项目的分支"><a href="#子模块都能自动跟随主项目的分支" class="headerlink" title="子模块都能自动跟随主项目的分支"></a>子模块都能自动跟随主项目的分支</h3><h4 id="1-配置子模块跟踪同名分支："><a href="#1-配置子模块跟踪同名分支：" class="headerlink" title="1.配置子模块跟踪同名分支："></a>1.配置子模块跟踪同名分支：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将子模块配置为跟踪与主项目同名的分支</span></span><br><span class="line">git config -f .gitmodules submodule.&lt;子模块路径&gt;.branch .</span><br></pre></td></tr></table></figure>
+<p>这里的 . 是一个特殊值，代表“与当前仓库分支同名的分支”。你也可以将 . 替换为具体的分支名，如 master 或 develop。</p>
+<h4 id="2-提交配置文件修改"><a href="#2-提交配置文件修改" class="headerlink" title="2.提交配置文件修改"></a>2.提交配置文件修改</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .gitmodules</span><br><span class="line">git commit -m <span class="string">&quot;chore: 配置子模块自动跟踪同名分支&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-执行更新"><a href="#3-执行更新" class="headerlink" title="3.执行更新"></a>3.执行更新</h4><p>配置完成后，使用以下命令可以让所有子模块自动切换到配置的分支（如果存在）并拉取最新代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature/new-branch</span><br><span class="line">git submodule update --remote --merge</span><br></pre></td></tr></table></figure>
+<p>此时，主项目和子模块应已处于 feature/new-branch 分支。</p>
 
         </div>
 
@@ -214,29 +216,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/posts/3223/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Git 常用命令</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/posts/2969/"
+                           href="/posts/16290/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Claude Code</span>
+                                <span class="post-nav-title-item">Docker使用手册</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -362,7 +349,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E7%90%86%E6%9E%84%E5%BB%BA%E7%BC%93%E5%AD%98"><span class="nav-text">清理构建缓存</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Submodule"><span class="nav-text">Submodule</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E6%89%80%E6%9C%89%E6%A8%A1%E5%9D%97%E5%88%86%E6%94%AF"><span class="nav-text">切换所有模块分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%A8%A1%E5%9D%97%E9%83%BD%E8%83%BD%E8%87%AA%E5%8A%A8%E8%B7%9F%E9%9A%8F%E4%B8%BB%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%88%86%E6%94%AF"><span class="nav-text">子模块都能自动跟随主项目的分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E5%AD%90%E6%A8%A1%E5%9D%97%E8%B7%9F%E8%B8%AA%E5%90%8C%E5%90%8D%E5%88%86%E6%94%AF%EF%BC%9A"><span class="nav-text">1.配置子模块跟踪同名分支：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%8F%90%E4%BA%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-text">2.提交配置文件修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%89%A7%E8%A1%8C%E6%9B%B4%E6%96%B0"><span class="nav-text">3.执行更新</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
