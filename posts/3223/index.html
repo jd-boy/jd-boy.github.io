@@ -200,20 +200,41 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="Submodule"><a href="#Submodule" class="headerlink" title="Submodule"></a>Submodule</h2><h3 id="初始化子模块"><a href="#初始化子模块" class="headerlink" title="初始化子模块"></a>初始化子模块</h3><p>当我们add子模块之后，会发现文件夹下没有任何内容。这个时候我们需要再执行下面的指令添加源码。</p>
+            <h2 id="Submodule"><a href="#Submodule" class="headerlink" title="Submodule"></a>Submodule</h2><p>Submodule 用于在一个 Git 仓库中引用并管理另一个 Git 仓库，适合外部库、公共组件等需要独立版本管理的场景。</p>
+<h3 id="添加子模块"><a href="#添加子模块" class="headerlink" title="添加子模块"></a>添加子模块</h3><p>把外部仓库作为子模块添加到当前仓库，<code>&lt;path&gt;</code> 可省略，默认使用仓库名作为目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git submodule add &lt;repo-url&gt; [&lt;path&gt;]</span><br><span class="line">git submodule add https://github.com/example/libfoo.git libfoo</span><br></pre></td></tr></table></figure>
+
+<h3 id="克隆后初始化和拉取"><a href="#克隆后初始化和拉取" class="headerlink" title="克隆后初始化和拉取"></a>克隆后初始化和拉取</h3><p>克隆包含子模块的仓库后，先初始化子模块配置，再拉取子模块内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;repo-url&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;repo-dir&gt;</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br></pre></td></tr></table></figure>
+
+<p>也可以用一条命令完成初始化和递归拉取，适合子模块里还有子模块的情况。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
 
-<p>这个命令是下面两条命令的合并版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br></pre></td></tr></table></figure>
+<h3 id="查看子模块"><a href="#查看子模块" class="headerlink" title="查看子模块"></a>查看子模块</h3><p>查看当前仓库中配置的子模块，以及子模块对应的提交和路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git submodule</span><br><span class="line">git submodule status</span><br></pre></td></tr></table></figure>
 
-<h3 id="切换所有模块分支"><a href="#切换所有模块分支" class="headerlink" title="切换所有模块分支"></a>切换所有模块分支</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule foreach git checkout -b &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="更新子模块"><a href="#更新子模块" class="headerlink" title="更新子模块"></a>更新子模块</h3><p>从子模块远程仓库拉取最新内容，并递归更新所有层级的子模块。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --recursive --remote</span><br></pre></td></tr></table></figure>
 
-<h3 id="子模块都能自动跟随主项目的分支"><a href="#子模块都能自动跟随主项目的分支" class="headerlink" title="子模块都能自动跟随主项目的分支"></a>子模块都能自动跟随主项目的分支</h3><h4 id="1-配置子模块跟踪同名分支："><a href="#1-配置子模块跟踪同名分支：" class="headerlink" title="1.配置子模块跟踪同名分支："></a>1.配置子模块跟踪同名分支：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将子模块配置为跟踪与主项目同名的分支</span></span><br><span class="line">git config -f .gitmodules submodule.&lt;子模块路径&gt;.branch .</span><br></pre></td></tr></table></figure>
-<p>这里的 . 是一个特殊值，代表“与当前仓库分支同名的分支”。你也可以将 . 替换为具体的分支名，如 master 或 develop。</p>
-<h4 id="2-提交配置文件修改"><a href="#2-提交配置文件修改" class="headerlink" title="2.提交配置文件修改"></a>2.提交配置文件修改</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .gitmodules</span><br><span class="line">git commit -m <span class="string">&quot;chore: 配置子模块自动跟踪同名分支&quot;</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-执行更新"><a href="#3-执行更新" class="headerlink" title="3.执行更新"></a>3.执行更新</h4><p>配置完成后，使用以下命令可以让所有子模块自动切换到配置的分支（如果存在）并拉取最新代码：</p>
+<h3 id="移除子模块"><a href="#移除子模块" class="headerlink" title="移除子模块"></a>移除子模块</h3><p>先取消子模块初始化，再从主仓库删除子模块引用，最后清理本地缓存目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git submodule deinit &lt;path&gt;</span><br><span class="line">git rm &lt;path&gt;</span><br><span class="line">rm -rf .git/modules/&lt;path&gt;</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git submodule deinit libfoo</span><br><span class="line">git rm libfoo</span><br><span class="line">rm -rf .git/modules/libfoo</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量切换子模块分支"><a href="#批量切换子模块分支" class="headerlink" title="批量切换子模块分支"></a>批量切换子模块分支</h3><p>对所有子模块执行同一条 Git 命令，例如批量创建并切换分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule foreach git checkout -b &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="让子模块跟随主项目同名分支"><a href="#让子模块跟随主项目同名分支" class="headerlink" title="让子模块跟随主项目同名分支"></a>让子模块跟随主项目同名分支</h3><p>将子模块配置为跟踪与主项目当前分支同名的分支，<code>.</code> 代表同名分支，也可以替换为 <code>master</code>、<code>develop</code> 等固定分支名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config -f .gitmodules submodule.&lt;子模块路径&gt;.branch .</span><br></pre></td></tr></table></figure>
+
+<p>提交 <code>.gitmodules</code> 配置变更。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .gitmodules</span><br><span class="line">git commit -m <span class="string">&quot;chore: 配置子模块自动跟踪同名分支&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，切换主项目分支并更新子模块。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature/new-branch</span><br><span class="line">git submodule update --remote --merge</span><br></pre></td></tr></table></figure>
-<p>此时，主项目和子模块应已处于 feature/new-branch 分支。</p>
+
+<p>如果子模块中存在同名分支，会自动跟随并拉取最新代码。</p>
 
         </div>
 
@@ -370,7 +391,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Submodule"><span class="nav-text">Submodule</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-text">初始化子模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E6%89%80%E6%9C%89%E6%A8%A1%E5%9D%97%E5%88%86%E6%94%AF"><span class="nav-text">切换所有模块分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%A8%A1%E5%9D%97%E9%83%BD%E8%83%BD%E8%87%AA%E5%8A%A8%E8%B7%9F%E9%9A%8F%E4%B8%BB%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%88%86%E6%94%AF"><span class="nav-text">子模块都能自动跟随主项目的分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E5%AD%90%E6%A8%A1%E5%9D%97%E8%B7%9F%E8%B8%AA%E5%90%8C%E5%90%8D%E5%88%86%E6%94%AF%EF%BC%9A"><span class="nav-text">1.配置子模块跟踪同名分支：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%8F%90%E4%BA%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-text">2.提交配置文件修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%89%A7%E8%A1%8C%E6%9B%B4%E6%96%B0"><span class="nav-text">3.执行更新</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Submodule"><span class="nav-text">Submodule</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-text">添加子模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E5%90%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%8B%89%E5%8F%96"><span class="nav-text">克隆后初始化和拉取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-text">查看子模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-text">更新子模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%AD%90%E6%A8%A1%E5%9D%97"><span class="nav-text">移除子模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E5%88%87%E6%8D%A2%E5%AD%90%E6%A8%A1%E5%9D%97%E5%88%86%E6%94%AF"><span class="nav-text">批量切换子模块分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A9%E5%AD%90%E6%A8%A1%E5%9D%97%E8%B7%9F%E9%9A%8F%E4%B8%BB%E9%A1%B9%E7%9B%AE%E5%90%8C%E5%90%8D%E5%88%86%E6%94%AF"><span class="nav-text">让子模块跟随主项目同名分支</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
