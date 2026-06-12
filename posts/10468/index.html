@@ -9,7 +9,7 @@
     
     <title>
         
-            Skills |
+            Docker 安装 RocketMQ |
         
         Bean You
     </title>
@@ -150,7 +150,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Skills</span>
+            <span class="title-hover-animation">Docker 安装 RocketMQ</span>
         </div>
 
         
@@ -168,7 +168,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2026-04-17 21:55:00
+        <i class="fas fa-edit"></i>&nbsp;2026-06-12 13:53:00
     </span>
     
         <span class="article-categories article-meta-item">
@@ -176,11 +176,15 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/AI/">AI</a>&nbsp;
+                        <a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
                     </li>
                 
                     <li>
-                        &gt; <a href="/categories/AI/AI%E5%B7%A5%E5%85%B7/">AI工具</a>&nbsp;
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        &gt; <a href="/categories/%E8%BF%90%E7%BB%B4/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/RocketMQ/">RocketMQ</a>&nbsp;
                     </li>
                 
             </ul>
@@ -204,12 +208,32 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="find-skills"><a href="#find-skills" class="headerlink" title="find-skills"></a>find-skills</h3><ul>
-<li>一句话描述需求</li>
-<li>AI 自动搜索最匹配的技能</li>
-<li>一键安装，立即可用</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx skills add vercel-labs/skills@find-skills -g -y</span><br></pre></td></tr></table></figure>
+            <h2 id="一、创建目录"><a href="#一、创建目录" class="headerlink" title="一、创建目录"></a>一、创建目录</h2><p>先创建 RocketMQ 的本机持久化目录，用于保存 broker 数据和日志。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /Users/jd/Documents/development/rocketmq/store</span><br><span class="line">mkdir -p /Users/jd/Documents/development/rocketmq/logs</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、编写-docker-compose-yml"><a href="#二、编写-docker-compose-yml" class="headerlink" title="二、编写 docker-compose.yml"></a>二、编写 docker-compose.yml</h2><p>创建 <code>docker-compose.yml</code> 文件，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.8&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">namesrv:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">apache/rocketmq:5.3.3</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rocketmq-namesrv</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9876:9876&quot;</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">sh</span> <span class="string">mqnamesrv</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">broker:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">apache/rocketmq:5.3.3</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rocketmq-broker</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">namesrv</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;10911:10911&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;10909:10909&quot;</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">sh</span> <span class="string">mqbroker</span> <span class="string">-n</span> <span class="string">namesrv:9876</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/Users/jd/Documents/development/rocketmq/store:/home/rocketmq/store</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/Users/jd/Documents/development/rocketmq/logs:/home/rocketmq/logs</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">dashboard:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">apacherocketmq/rocketmq-dashboard:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rocketmq-dashboard</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">namesrv</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;18080:8082&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、启动-RocketMQ"><a href="#三、启动-RocketMQ" class="headerlink" title="三、启动 RocketMQ"></a>三、启动 RocketMQ</h2><p>在 <code>docker-compose.yml</code> 所在目录执行启动命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、查看容器状态"><a href="#四、查看容器状态" class="headerlink" title="四、查看容器状态"></a>四、查看容器状态</h2><p>查看 RocketMQ 容器是否正常启动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose ps</span><br></pre></td></tr></table></figure>
+
+<p>查看 NameServer 日志。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f rocketmq-namesrv</span><br></pre></td></tr></table></figure>
+
+<p>查看 Broker 日志。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f rocketmq-broker</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、访问-Dashboard"><a href="#五、访问-Dashboard" class="headerlink" title="五、访问 Dashboard"></a>五、访问 Dashboard</h2><p>启动成功后，浏览器访问 RocketMQ Dashboard：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:18080</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、停止和清理"><a href="#六、停止和清理" class="headerlink" title="六、停止和清理"></a>六、停止和清理</h2><p>停止并移除容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose down</span><br></pre></td></tr></table></figure>
+
+<p><code>docker compose down</code> 不会删除本机挂载目录，数据和日志仍然保留在：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/Users/jd/Documents/development/rocketmq/store</span><br><span class="line">/Users/jd/Documents/development/rocketmq/logs</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -218,29 +242,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/posts/10468/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Docker 安装 RocketMQ</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/posts/3223/"
+                           href="/posts/52888/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Git 常用命令</span>
+                                <span class="post-nav-title-item">Skills</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -366,7 +375,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#find-skills"><span class="nav-text">find-skills</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="nav-text">一、创建目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E5%86%99-docker-compose-yml"><span class="nav-text">二、编写 docker-compose.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%90%AF%E5%8A%A8-RocketMQ"><span class="nav-text">三、启动 RocketMQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%8A%B6%E6%80%81"><span class="nav-text">四、查看容器状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%AE%BF%E9%97%AE-Dashboard"><span class="nav-text">五、访问 Dashboard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%81%9C%E6%AD%A2%E5%92%8C%E6%B8%85%E7%90%86"><span class="nav-text">六、停止和清理</span></a></li></ol>
     </div>
 </div>
         </aside>
